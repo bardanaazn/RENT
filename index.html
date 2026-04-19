@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rental Mobil Saya</title>
+    <style>
+        /* INI ADALAH BAGIAN CSS UNTUK MENGHIAS WEBSITE */
+        body {
+            font-family: Arial, sans-serif; /* Mengubah jenis huruf */
+            background-color: #f0f2f5; /* Memberi warna latar belakang abu-abu terang */
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .kotak-utama {
+            background-color: white; /* Memberi warna putih pada kotak konten */
+            max-width: 600px; /* Mengatur lebar maksimal kotak */
+            margin: 0 auto; /* Membuat kotak berada persis di tengah layar */
+            padding: 30px;
+            border-radius: 12px; /* Membuat sudut kotak melengkung */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Memberi efek bayangan halus */
+            text-align: center; /* Membuat teks berada di tengah */
+        }
+
+        .foto-mobil {
+            width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+        }
+
+        .harga {
+            color: #e74c3c; /* Memberi warna merah pada harga */
+            font-size: 20px;
+        }
+
+        /* Desain Tombol WhatsApp */
+        .btn-whatsapp {
+            background-color: #25D366; /* Warna hijau khas WhatsApp */
+            color: white; /* Warna teks putih */
+            border: none; /* Menghilangkan garis pinggir tombol */
+            padding: 12px 24px; /* Mengatur ukuran tombol */
+            font-size: 16px;
+            border-radius: 8px; /* Membuat sudut tombol melengkung */
+            cursor: pointer; /* Mengubah kursor jadi gambar tangan saat diarahkan ke tombol */
+            font-weight: bold;
+            margin-top: 15px;
+            width: 100%; /* Membuat tombol selebar kotak */
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E; /* Warna hijau berubah sedikit gelap saat disentuh mouse */
+        }
+        
+        a {
+            text-decoration: none; /* Menghilangkan garis bawah biru pada link */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kotak-utama">
+        
+        <h1>Selamat Datang di Rental Mobil</h1>
+        <p>Sewa mobil mudah, cepat, dan terpercaya.</p>
+
+        <div class="kotak-mobil">
+            <h2>Mobil TOYOTA</h2>
+            
+            <img src="TOYOTA.jpg" alt="Foto Mobil Avanza" class="foto-mobil">
+            <p>Tarif: <strong class="harga">Rp 150.000 / Jam</strong></p>
+            <p>(Minimal order 1 jam)</p>
+            <p><strong>Fasilitas:</strong> AC dingin, bensin irit, mobil bersih terawat.</p>
+
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20pesan%20rental%20mobilnya%20yang%20perjam%20150k" target="_blank">
+                <button class="btn-whatsapp">📞 Pesan via WhatsApp</button>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
