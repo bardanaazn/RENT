@@ -1,82 +1,546 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Rental Mobil Saya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Mobil Premium</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
-        /* INI ADALAH BAGIAN CSS UNTUK MENGHIAS WEBSITE */
+        html {
+    scroll-behavior: smooth;
+}
+        /* TEMA WARNA WEBSITE KITA */
+        :root {
+            --kuning: #FFC107; /* Warna kuning khas website di gambar */
+            --gelap: #212529;
+        }
+
         body {
-            font-family: Arial, sans-serif; /* Mengubah jenis huruf */
-            background-color: #f0f2f5; /* Memberi warna latar belakang abu-abu terang */
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .kotak-utama {
-            background-color: white; /* Memberi warna putih pada kotak konten */
-            max-width: 600px; /* Mengatur lebar maksimal kotak */
-            margin: 0 auto; /* Membuat kotak berada persis di tengah layar */
-            padding: 30px;
-            border-radius: 12px; /* Membuat sudut kotak melengkung */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Memberi efek bayangan halus */
-            text-align: center; /* Membuat teks berada di tengah */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* Warna dasar abu-abu sangat muda */
         }
 
-        .foto-mobil {
-            width: 100%; 
-            height: auto; 
-            border-radius: 8px; 
-            margin-bottom: 15px; 
+        /* --- BAGIAN 1: GAMBAR LATAR BELAKANG (HERO) --- */
+        .hero-section {
+            /* Ganti 'bg-hero.jpg' dengan nama foto mobil Anda */
+            /* Kode rgba(0,0,0,0.7) ini memberi efek kaca film hitam transparan di atas foto */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Tingginya 100% layar */
+            display: flex;
+            flex-direction: column;
         }
 
-        .harga {
-            color: #e74c3c; /* Memberi warna merah pada harga */
-            font-size: 20px;
+        /* --- DESAIN MENU ATAS --- */
+        .navbar-brand {
+            color: var(--kuning) !important;
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+        .nav-link:hover {
+            color: var(--kuning) !important; /* Menu jadi kuning saat disentuh mouse */
         }
 
-        /* Desain Tombol WhatsApp */
-        .btn-whatsapp {
-            background-color: #25D366; /* Warna hijau khas WhatsApp */
-            color: white; /* Warna teks putih */
-            border: none; /* Menghilangkan garis pinggir tombol */
-            padding: 12px 24px; /* Mengatur ukuran tombol */
-            font-size: 16px;
-            border-radius: 8px; /* Membuat sudut tombol melengkung */
-            cursor: pointer; /* Mengubah kursor jadi gambar tangan saat diarahkan ke tombol */
+        /* --- TEKS DI TENGAH GAMBAR --- */
+        .konten-tengah {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .teks-kecil-kuning {
+            color: var(--kuning);
             font-weight: bold;
-            margin-top: 15px;
-            width: 100%; /* Membuat tombol selebar kotak */
+            letter-spacing: 2px;
+        }
+        .judul-besar {
+            font-size: 3.5rem; /* Ukuran font sangat besar */
+            font-weight: 800;
+        }
+        .btn-pilih-mobil {
+            background-color: white;
+            color: black;
+            padding: 12px 35px;
+            border-radius: 30px; /* Membuat tombol melengkung oval */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-pilih-mobil:hover {
+            background-color: var(--kuning);
+            color: black;
+        }
+        /* --- BAGIAN 2: 4 KOTAK KUNING --- */
+        .wadah-fitur {
+            /* Angka minus ini yang membuat kotaknya "naik" dan menabrak gambar latar */
+            margin-top: -60px; 
+            position: relative;
+            z-index: 10;
+            padding-bottom: 60px;
+        }
+        .kotak-kuning {
+            background-color: var(--kuning);
+            color: black;
+            border-radius: 15px; /* Membuat sudut melengkung */
+            padding: 30px 15px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Efek bayangan */
+            transition: transform 0.3s; /* Persiapan untuk animasi */
+        }
+        .kotak-kuning:hover {
+            transform: translateY(-10px); /* Efek lompat sedikit saat disentuh mouse */
+        }
+        .ikon-fitur {
+            font-size: 45px; /* Ukuran ikon */
+            margin-bottom: 15px;
+            display: block;
+        }
+        .teks-fitur-kecil {
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        .teks-fitur-tebal {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 0;
+        }
+        /* --- BAGIAN 3: TENTANG KAMI & FASILITAS --- */
+        .jarak-section {
+            padding: 80px 0; /* Memberi ruang kosong di atas dan bawah */
+        }
+        .gambar-tentang {
+            width: 100%;
+            border-radius: 20px; /* Sudut gambar membulat */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .judul-section {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .teks-abu {
+            color: #6c757d;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        .kotak-hubungi {
+            display: flex; /* Membuat ikon dan teks sejajar ke samping */
+            align-items: center;
+            margin-top: 30px;
+        }
+        .ikon-telp {
+            background-color: var(--gelap);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%; /* Membuat kotak menjadi lingkaran sempurna */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+        .nomor-telp {
+            font-size: 26px;
+            font-weight: 900;
+            margin: 0;
+            color: var(--gelap);
         }
 
-        .btn-whatsapp:hover {
-            background-color: #128C7E; /* Warna hijau berubah sedikit gelap saat disentuh mouse */
+        /* Desain Kotak Putih Fasilitas */
+        .kotak-putih {
+            background-color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Bayangan sangat halus */
+            height: 100%;
+            transition: 0.3s;
+        }
+        .kotak-putih:hover {
+            transform: translateY(-5px); /* Efek melayang saat disentuh */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .ikon-fasilitas {
+            font-size: 45px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        /* --- BAGIAN 4: KARTU KATALOG MOBIL --- */
+        .kartu-mobil {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden; /* Supaya warna hitam di harga tidak keluar garis melengkung */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            padding-bottom: 30px;
+            height: 100%;
+            transition: 0.3s;
+        }
+        .kartu-mobil:hover {
+            transform: scale(1.02); /* Efek membesar sedikit saat disentuh */
+        }
+        .nama-mobil {
+            padding: 20px 0 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--gelap);
+        }
+        .bar-harga {
+            background-color: var(--gelap);
+            color: white;
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .foto-katalog {
+            width: 80%;
+            height: 180px;
+            object-fit: contain; /* Memastikan foto mobil tidak penyok/gepeng */
+            margin: 20px auto;
+            display: block;
+        }
+        .list-spek {
+            list-style: none; /* Menghilangkan titik (bullet) bawaan HTML */
+            padding: 0 30px;
+            margin-bottom: 25px;
+        }
+        .list-spek li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0; /* Garis abu-abu tipis antar teks */
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .list-spek li:last-child {
+            border-bottom: none; /* Menghilangkan garis di teks paling bawah */
+        }
+        .btn-wa-kuning {
+            background-color: var(--kuning);
+            color: black;
+            font-weight: 800;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-wa-kuning:hover {
+            background-color: #e0a800; /* Warna kuning sedikit gelap saat disentuh */
+            color: black;
+        }
+        /* --- BAGIAN 5: BANNER KUNING & TESTIMONI --- */
+        .banner-kuning {
+            background-color: var(--kuning);
+            padding: 50px 0;
+            margin-top: 80px;
+            overflow: hidden; /* Mencegah elemen keluar batas */
+        }
+        .teks-banner {
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--gelap);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .btn-hitam {
+            background-color: var(--gelap);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            display: inline-block;
+        }
+        .btn-hitam:hover {
+            background-color: black;
+            color: white;
+        }
+        .foto-banner-mobil {
+            width: 100%;
+            max-width: 500px; /* Membatasi besaran gambar */
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- TESTIMONI --- */
+        .kotak-testimoni {
+            background-color: var(--gelap);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .foto-profil {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
         }
         
-        a {
-            text-decoration: none; /* Menghilangkan garis bawah biru pada link */
+        /* --- FOOTER (Bagian paling bawah) --- */
+        .footer {
+            background-color: #1a1d20;
+            color: #adb5bd;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <div class="kotak-utama">
+    <div class="hero-section">
         
-        <h1>Selamat Datang di Rental Mobil</h1>
-        <p>Sewa mobil mudah, cepat, dan terpercaya.</p>
+        <nav class="navbar navbar-expand-lg pt-4">
+            <div class="container">
+                <a class="navbar-brand" href="#">🚕 RentalinAJA</a>
+                
+                <div class="d-none d-lg-block">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Tentang kami</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Testimoni</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Mobil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Hubungi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <div class="kotak-mobil">
-            <h2>Mobil TOYOTA</h2>
-            
-            <img src="TOYOTA.jpg" alt="Foto Mobil Avanza" class="foto-mobil">
-            <p>Tarif: <strong class="harga">Rp 150.000 / Jam</strong></p>
-            <p>(Minimal order 1 jam)</p>
-            <p><strong>Fasilitas:</strong> AC dingin, bensin irit, mobil bersih terawat.</p>
-
-            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20pesan%20rental%20mobilnya%20yang%20perjam%20150k" target="_blank">
-                <button class="btn-whatsapp">📞 Pesan via WhatsApp</button>
-            </a>
+        <div class="container text-center konten-tengah text-white">
+            <p class="teks-kecil-kuning">RentalinAJA</p>
+            <h1 class="judul-besar">Rental Mobil Terpercaya di<br>DEPOK</h1>
+            <a href="#daftar-mobil" class="btn-pilih-mobil">Pilih Mobil</a>
         </div>
 
     </div>
+    <div class="container wadah-fitur">
+        <div class="row g-4"> <div class="col-6 col-lg-3">
+                <div class="kotak-kuning">
+                    <i class="bi bi-cash-stack ikon-fitur"></i>
+                    <p class="teks-fitur-kecil">Best Price</p>
+                    <p class="teks-fitur-tebal">Guaranteed</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="kotak-kuning">
+                    <i class="bi bi-clock-history ikon-fitur"></i>
+                    <p class="teks-fitur-kecil">24/7 Customer</p>
+                    <p class="teks-fitur-tebal">Care Service</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="kotak-kuning">
+                    <i class="bi bi-house-door ikon-fitur"></i>
+                    <p class="teks-fitur-kecil">Home</p>
+                    <p class="teks-fitur-tebal">Pickups</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="kotak-kuning">
+                    <i class="bi bi-calendar-check ikon-fitur"></i>
+                    <p class="teks-fitur-kecil">Easy</p>
+                    <p class="teks-fitur-tebal">Bookings</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container jarak-section">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <img src="mobil-2.jpg" alt="Pilihan Pertama" class="gambar-tentang">
+            </div>
+            
+            <div class="col-lg-6">
+                <h2 class="judul-section">Pilihan pertama<br>rental mobil Anda</h2>
+                <p class="teks-abu">Kami menyediakan layanan sewa mobil terbaik dengan armada yang selalu terawat, bersih, dan wangi. Kepuasan perjalanan Anda adalah prioritas utama kami.</p>
+                <p class="teks-abu">Didukung oleh supir yang ramah dan berpengalaman, kami siap mengantar Anda ke berbagai tujuan dengan aman dan nyaman.</p>
+                
+                <div class="kotak-hubungi">
+                    <div class="ikon-telp">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <div>
+                        <p style="margin:0; color:#6c757d; font-size:14px;">Hubungi kami</p>
+                        <p class="nomor-telp">+62 858 7103 8319</p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jarak-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Fasilitas</p>
+                <h2 class="judul-section">Kenapa Memilih Kami?</h2>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="kotak-putih">
+                        <i class="bi bi-geo-alt ikon-fasilitas"></i>
+                        <h5 style="font-weight: 800; margin-bottom:15px;">Jemput di Lokasi</h5>
+                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="kotak-putih">
+                        <i class="bi bi-airplane ikon-fasilitas"></i>
+                        <h5 style="font-weight: 800; margin-bottom:15px;">Airport Transfer</h5>
+                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="kotak-putih">
+                        <i class="bi bi-signpost-split ikon-fasilitas"></i>
+                        <h5 style="font-weight: 800; margin-bottom:15px;">GPS Tracker</h5>
+                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="kotak-putih">
+                        <i class="bi bi-car-front ikon-fasilitas"></i>
+                        <h5 style="font-weight: 800; margin-bottom:15px;">Armada Baru</h5>
+                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="daftar-mobil" class="container jarak-section">
+        <div class="text-center mb-5">
+            <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Armada Kami</p>
+            <h2 class="judul-section">Pilihan Mobil</h2>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">Avanza New</div>
+                    <div class="bar-harga">Rp 150.000</div>
+                    
+                    <img src="avanza.jpg" class="foto-katalog" alt="Mobil Avanza">
+                    
+                    <ul class="list-spek">
+                        <li>Rp 150.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Muat untuk 5-6 penumpang</li>
+                        <li>Mobil Bersih & Terawat</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Avanza%20perjam%20150k" target="_blank" class="btn-wa-kuning">
+                        <i class="bi bi-whatsapp"></i> Pilih Mobil
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">Honda Jazz</div>
+                    <div class="bar-harga">Rp 150.000</div>
+                    
+                    <img src="jazz.jpg" class="foto-katalog" alt="Mobil Jazz">
+                    
+                    <ul class="list-spek">
+                        <li>Rp 150.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Muat untuk 4-5 penumpang</li>
+                        <li>Mobil Bersih & Terawat</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Jazz%20perjam%20150k" target="_blank" class="btn-wa-kuning">
+                        <i class="bi bi-whatsapp"></i> Pilih Mobil
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">Innova New</div>
+                    <div class="bar-harga">Rp 200.000</div>
+                    
+                    <img src="innova.jpg" class="foto-katalog" alt="Mobil Innova">
+                    
+                    <ul class="list-spek">
+                        <li>Rp 200.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Muat untuk 6-7 penumpang</li>
+                        <li>Kabin Luas & Mewah</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Innova%20perjam%20200k" target="_blank" class="btn-wa-kuning">
+                        <i class="bi bi-whatsapp"></i> Pilih Mobil
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="banner-kuning">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7 text-center text-md-start mb-4 mb-md-0">
+                    <h2 class="teks-banner">Hubungi sekarang dan<br>pesan mobil Anda</h2>
+                    <a href="https://wa.me/6285871038319" target="_blank" class="btn-hitam">
+                        <i class="bi bi-whatsapp"></i> Hubungi kami
+                    </a>
+                </div>
+                <div class="col-md-5 text-center">
+                    <img src="avanza.jpg" alt="Pesan Sekarang" class="foto-banner-mobil">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container jarak-section">
+        <div class="row align-items-center g-5">
+            
+            <div class="col-lg-6">
+                <h2 class="judul-section">Kepuasan pelanggan adalah<br>prioritas kami</h2>
+                <p class="teks-abu">Kami selalu memastikan setiap kendaraan dalam kondisi prima sebelum disewakan. Banyak pelanggan yang puas dengan pelayanan kami dan kembali menyewa untuk perjalanan berikutnya.</p>
+                <p class="teks-abu">Komitmen kami adalah memberikan pengalaman berkendara yang aman, nyaman, dan bebas hambatan selama perjalanan Anda.</p>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="kotak-testimoni">
+                    <h3 style="font-weight: 800; margin-bottom: 25px;">Apa kata pelanggan</h3>
+                    <p style="color: #adb5bd; font-size: 16px; line-height: 1.8; margin-bottom: 30px;">
+                        "Sangat direkomendasikan! Mobilnya bersih, wangi, dan AC-nya sangat dingin. Proses serah terima kunci juga cepat tanpa ribet. Pasti akan sewa di RentalinAJA lagi!"
+                    </p>
+                    
+                    <div class="d-flex align-items-center">
+                        <img src="https://ui-avatars.com/api/?name=Andhito+Nax+Citayem&background=FFC107&color=000" alt="Andhito" class="foto-profil">
+                        <div>
+                            <h6 style="margin: 0; font-weight: bold; color: white;">Andhito Nax Citayem</h6>
+                            <p style="margin: 0; font-size: 14px; color: #adb5bd;">Pelanggan Setia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="m-0">&copy; 2026 RentalinAJA. All Rights Reserved. Dibuat dengan bangga.</p>
+    </footer>
 
 </body>
 </html>
