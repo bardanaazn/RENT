@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentalinAJA - Rental Mobil Depok</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        :root {
+            --kuning: #FFC107;
+            --gelap: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 90vh; /* Sedikit diperpendek agar lebih proporsional */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            color: var(--kuning) !important;
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+        .nav-link:hover { color: var(--kuning) !important; }
+
+        .konten-tengah { margin-top: auto; margin-bottom: auto; }
+        .teks-kecil-kuning { color: var(--kuning); font-weight: bold; letter-spacing: 2px; }
+        .judul-besar { font-size: 3.5rem; font-weight: 800; }
+        
+        .btn-pilih-mobil {
+            background-color: var(--kuning);
+            color: black;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-pilih-mobil:hover {
+            background-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- SECTION GENERAL --- */
+        .jarak-section { padding: 80px 0; }
+        .judul-section { font-size: 36px; font-weight: 800; margin-bottom: 20px; }
+        .teks-abu { color: #6c757d; line-height: 1.8; font-size: 16px; }
+
+        /* --- KATALOG MOBIL --- */
+        .kartu-mobil {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            padding-bottom: 30px;
+            height: 100%;
+            transition: 0.3s;
+        }
+        .nama-mobil { padding: 20px 0 10px 0; font-size: 18px; font-weight: bold; color: var(--gelap); }
+        .bar-harga { background-color: var(--gelap); color: white; padding: 10px 0; font-size: 20px; font-weight: 800; }
+        .foto-katalog { width: 80%; height: 180px; object-fit: contain; margin: 20px auto; display: block; }
+        .list-spek { list-style: none; padding: 0 30px; margin-bottom: 25px; }
+        .list-spek li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; color: #6c757d; font-size: 14px; }
+        .btn-wa-kuning {
+            background-color: var(--kuning);
+            color: black;
+            font-weight: 800;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* --- BANNER KUNING & TESTIMONI --- */
+        .banner-kuning { background-color: var(--kuning); padding: 60px 0; }
+        .teks-banner { font-size: 38px; font-weight: 900; color: var(--gelap); line-height: 1.2; }
+        .btn-hitam { background-color: var(--gelap); color: white; padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; }
+        .foto-banner-mobil { width: 100%; max-width: 450px; display: block; margin: 0 auto; }
+
+        .kotak-testimoni { background-color: var(--gelap); color: white; padding: 50px 40px; border-radius: 20px; }
+        .foto-profil { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-right: 15px; }
+        .footer { background-color: #1a1d20; color: #adb5bd; text-align: center; padding: 25px 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <nav class="navbar navbar-expand-lg pt-4">
+            <div class="container">
+                <a class="navbar-brand" href="#">🚕 RentalinAJA</a>
+                <div class="ms-auto d-flex align-items-center">
+                    <ul class="navbar-nav d-none d-lg-flex me-3">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#daftar-mobil">Mobil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
+                    </ul>
+                    <a class="nav-link btn btn-warning text-dark fw-bold px-4" href="login.html" style="background-color: var(--kuning); border-radius: 20px;">Login</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container text-center konten-tengah text-white">
+            <p class="teks-kecil-kuning">RentalinAJA</p>
+            <h1 class="judul-besar">Rental Mobil Terpercaya di<br>DEPOK</h1>
+            <a href="#daftar-mobil" class="btn-pilih-mobil">Pilih Mobil</a>
+        </div>
+    </div>
+
+    <div id="daftar-mobil" class="container jarak-section">
+        <div class="text-center mb-5">
+            <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Armada Kami</p>
+            <h2 class="judul-section">Pilihan Mobil</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">MITSUBISHI FUSO</div>
+                    <div class="bar-harga">Rp 150.000</div>
+                    <img src="trukgede.jpeg" class="foto-katalog" alt="Fuso">
+                    <ul class="list-spek">
+                        <li>Rp 150.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Mobil Bersih & Terawat</li>
+                    </ul>
+                    <a href="https://wa.me/6285871038319" class="btn-wa-kuning"><i class="bi bi-whatsapp"></i> Pilih Mobil</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">SMJ MONSTER 565</div>
+                    <div class="bar-harga">Rp 150.000</div>
+                    <img src="mobil-ijo.jpg" class="foto-katalog" alt="Monster">
+                    <ul class="list-spek">
+                        <li>Rp 150.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Mobil Bersih & Terawat</li>
+                    </ul>
+                    <a href="https://wa.me/6285871038319" class="btn-wa-kuning"><i class="bi bi-whatsapp"></i> Pilih Mobil</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="kartu-mobil">
+                    <div class="nama-mobil">Komatsu PC200</div>
+                    <div class="bar-harga">Rp 200.000</div>
+                    <img src="eksavator.jpg" class="foto-katalog" alt="Eksavator">
+                    <ul class="list-spek">
+                        <li>Rp 200.000 / Jam</li>
+                        <li>Minimal Order 1 Jam</li>
+                        <li>Kabin Luas & Mewah</li>
+                    </ul>
+                    <a href="https://wa.me/6285871038319" class="btn-wa-kuning"><i class="bi bi-whatsapp"></i> Pilih Mobil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner-kuning">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7 text-center text-md-start mb-4 mb-md-0">
+                    <h2 class="teks-banner">Hubungi sekarang dan<br>pesan mobil Anda</h2>
+                    <a href="https://wa.me/6285871038319" target="_blank" class="btn-hitam mt-3">
+                        <i class="bi bi-whatsapp"></i> Hubungi kami
+                    </a>
+                </div>
+                <div class="col-md-5 text-center">
+                    <img src="avanza.jpg" alt="Pesan Sekarang" class="foto-banner-mobil">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="testimoni" class="container jarak-section">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="judul-section">Kepuasan pelanggan adalah prioritas kami</h2>
+                <p class="teks-abu">Kami memastikan setiap kendaraan dalam kondisi prima. Banyak pelanggan yang puas dengan pelayanan kami dan kembali menyewa untuk perjalanan berikutnya.</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="kotak-testimoni">
+                    <h3 style="font-weight: 800; margin-bottom: 25px;">Apa kata pelanggan</h3>
+                    <p style="color: #adb5bd; font-size: 16px; line-height: 1.8; margin-bottom: 30px;">
+                        "Sangat direkomendasikan! Mobilnya bersih, wangi, dan prosesnya cepat tanpa ribet. Pasti akan sewa di RentalinAJA lagi!"
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <img src="https://ui-avatars.com/api/?name=Andhito+Nax+Citayem&background=FFC107&color=000" alt="Andhito" class="foto-profil">
+                        <div>
+                            <h6 style="margin: 0; font-weight: bold; color: white;">Andhito Nax Citayem</h6>
+                            <p style="margin: 0; font-size: 14px; color: #adb5bd;">Pelanggan Setia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="m-0">&copy; 2026 RentalinAJA. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

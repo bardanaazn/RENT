@@ -27,7 +27,7 @@
         .hero-section {
             /* Ganti 'bg-hero.jpg' dengan nama foto mobil Anda */
             /* Kode rgba(0,0,0,0.7) ini memberi efek kaca film hitam transparan di atas foto */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-hero.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('avanza.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh; /* Tingginya 100% layar */
@@ -274,11 +274,18 @@
 
         /* --- TESTIMONI --- */
         .kotak-testimoni {
-            background-color: var(--gelap);
-            color: white;
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        background-color: #212529; /* Warna gelap */
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        min-height: 450px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        #daftar-ulasan-container {
+        max-height: 350px; /* Supaya kalau banyak bisa di-scroll */
+        overflow-y: auto;
+        margin-top: 20px;
         }
         .foto-profil {
             width: 60px;
@@ -313,6 +320,7 @@
                         <li class="nav-item"><a class="nav-link" href="#">Testimoni</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Mobil</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Hubungi</a></li>
+                        <li class="nav-item">
                     </ul>
                 </div>
             </div>
@@ -325,180 +333,101 @@
         </div>
 
     </div>
-    <div class="container wadah-fitur">
-        <div class="row g-4"> <div class="col-6 col-lg-3">
-                <div class="kotak-kuning">
-                    <i class="bi bi-cash-stack ikon-fitur"></i>
-                    <p class="teks-fitur-kecil">Best Price</p>
-                    <p class="teks-fitur-tebal">Guaranteed</p>
-                </div>
-            </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="kotak-kuning">
-                    <i class="bi bi-clock-history ikon-fitur"></i>
-                    <p class="teks-fitur-kecil">24/7 Customer</p>
-                    <p class="teks-fitur-tebal">Care Service</p>
-                </div>
-            </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="kotak-kuning">
-                    <i class="bi bi-house-door ikon-fitur"></i>
-                    <p class="teks-fitur-kecil">Home</p>
-                    <p class="teks-fitur-tebal">Pickups</p>
-                </div>
-            </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="kotak-kuning">
-                    <i class="bi bi-calendar-check ikon-fitur"></i>
-                    <p class="teks-fitur-kecil">Easy</p>
-                    <p class="teks-fitur-tebal">Bookings</p>
-                </div>
-            </div>
-
-        </div>
+    
     </div>
-    <div class="container jarak-section">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <img src="mobil-2.jpg" alt="Pilihan Pertama" class="gambar-tentang">
-            </div>
+
+    <div class="jarak-section bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Fasilitas</p>
+            <h2 class="judul-section">Kenapa Memilih Kami?</h2>
+        </div>
+        
+        <div class="row g-4 text-center justify-content-center">
             
-            <div class="col-lg-6">
-                <h2 class="judul-section">Pilihan pertama<br>rental mobil Anda</h2>
-                <p class="teks-abu">Kami menyediakan layanan sewa mobil terbaik dengan armada yang selalu terawat, bersih, dan wangi. Kepuasan perjalanan Anda adalah prioritas utama kami.</p>
-                <p class="teks-abu">Didukung oleh supir yang ramah dan berpengalaman, kami siap mengantar Anda ke berbagai tujuan dengan aman dan nyaman.</p>
-                
-                <div class="kotak-hubungi">
-                    <div class="ikon-telp">
-                        <i class="bi bi-telephone-fill"></i>
-                    </div>
-                    <div>
-                        <p style="margin:0; color:#6c757d; font-size:14px;">Hubungi kami</p>
-                        <p class="nomor-telp">+62 858 7103 8319</p> 
-                    </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="kotak-putih">
+                    <i class="bi bi-wallet2 ikon-fasilitas"></i>
+                    <h5 style="font-weight: 800; margin-bottom:15px;">Harga Terjangkau</h5>
+                    <p class="teks-abu" style="font-size: 14px;">Tarif sewa kompetitif dan transparan mulai dari Rp 150rb/jam tanpa biaya tersembunyi.</p>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="jarak-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Fasilitas</p>
-                <h2 class="judul-section">Kenapa Memilih Kami?</h2>
-            </div>
-            
-            <div class="row g-4 text-center">
-                <div class="col-lg-3 col-md-6">
-                    <div class="kotak-putih">
-                        <i class="bi bi-geo-alt ikon-fasilitas"></i>
-                        <h5 style="font-weight: 800; margin-bottom:15px;">Jemput di Lokasi</h5>
-                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="kotak-putih">
-                        <i class="bi bi-airplane ikon-fasilitas"></i>
-                        <h5 style="font-weight: 800; margin-bottom:15px;">Airport Transfer</h5>
-                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="kotak-putih">
-                        <i class="bi bi-signpost-split ikon-fasilitas"></i>
-                        <h5 style="font-weight: 800; margin-bottom:15px;">GPS Tracker</h5>
-                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="kotak-putih">
-                        <i class="bi bi-car-front ikon-fasilitas"></i>
-                        <h5 style="font-weight: 800; margin-bottom:15px;">Armada Baru</h5>
-                        <p class="teks-abu" style="font-size: 14px;">Kami selalu menjemput klien kami tepat waktu, ketersediaan 24/7.</p>
-                    </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="kotak-putih">
+                    <i class="bi bi-stars ikon-fasilitas"></i>
+                    <h5 style="font-weight: 800; margin-bottom:15px;">Unit Bersih & Prima</h5>
+                    <p class="teks-abu" style="font-size: 14px;">Setiap unit selalu dibersihkan dan dicek rutin untuk memastikan kenyamanan perjalanan Anda.</p>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="kotak-putih">
+                    <i class="bi bi-geo-fill ikon-fasilitas"></i>
+                    <h5 style="font-weight: 800; margin-bottom:15px;">Antar Jemput Depok</h5>
+                    <p class="teks-abu" style="font-size: 14px;">Layanan antar jemput unit langsung ke alamat Anda di seluruh wilayah Depok dan sekitarnya.</p>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
     <div id="daftar-mobil" class="container jarak-section">
         <div class="text-center mb-5">
             <p style="color: #6c757d; font-weight: bold; letter-spacing: 1px;">Armada Kami</p>
             <h2 class="judul-section">Pilihan Mobil</h2>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
+    
+    <div class="col-lg-4 col-md-6">
+        <div class="kartu-mobil">
+            <div class="nama-mobil">TOYOTA AVANZA</div>
+            <div class="bar-harga">Rp 150.000</div>
             
-            <div class="col-lg-4 col-md-6">
-                <div class="kartu-mobil">
-                    <div class="nama-mobil">MITSUBISHI FUSO</div>
-                    <div class="bar-harga">Rp 150.000</div>
-                    
-                    <img src="trukgede.jpeg" class="foto-katalog" alt="Mobil Avanza">
-                    
-                    <ul class="list-spek">
-                        <li>Rp 150.000 / Jam</li>
-                        <li>Minimal Order 1 Jam</li>
-                        <li>Muat untuk 5-6 penumpang</li>
-                        <li>Mobil Bersih & Terawat</li>
-                    </ul>
-                    
-                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Avanza%20perjam%20150k" target="_blank" class="btn-wa-kuning">
-                        <i class="bi bi-whatsapp"></i> Pilih Mobil
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="kartu-mobil">
-                    <div class="nama-mobil">SMJ MONSTER 565 NEW</div>
-                    <div class="bar-harga">Rp 150.000</div>
-                    
-                    <img src="mobil-ijo.jpg" class="foto-katalog" alt="Mobil Jazz">
-                    
-                    <ul class="list-spek">
-                        <li>Rp 150.000 / Jam</li>
-                        <li>Minimal Order 1 Jam</li>
-                        <li>Muat untuk 4-5 penumpang</li>
-                        <li>Mobil Bersih & Terawat</li>
-                    </ul>
-                    
-                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Jazz%20perjam%20150k" target="_blank" class="btn-wa-kuning">
-                        <i class="bi bi-whatsapp"></i> Pilih Mobil
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="kartu-mobil">
-                    <div class="nama-mobil">Komatsu PC200</div>
-                    <div class="bar-harga">Rp 200.000</div>
-                    
-                    <img src="eksavator.jpg" class="foto-katalog" alt="Mobil Innova">
-                    
-                    <ul class="list-spek">
-                        <li>Rp 200.000 / Jam</li>
-                        <li>Minimal Order 1 Jam</li>
-                        <li>Muat untuk 6-7 penumpang</li>
-                        <li>Kabin Luas & Mewah</li>
-                    </ul>
-                    
-                    <a href="https://wa.me/6285871038319?text=Halo%20Admin,%20saya%20mau%20pesan%20Innova%20perjam%20200k" target="_blank" class="btn-wa-kuning">
-                        <i class="bi bi-whatsapp"></i> Pilih Mobil
-                    </a>
-                </div>
-            </div>
-
+            <img src="avanza.jpeg" class="foto-katalog" alt="Toyota Avanza">
+            
+            <ul class="list-spek">
+                <li>Rp 150.000 / Jam</li>
+                <li>Minimal Order 1 Jam</li>
+                <li>Kapasitas 7 Penumpang</li>
+                <li>AC Dingin & Nyaman</li>
+            </ul>
+            
+            <a href="https://wa.me/6283801992917?text=Halo%20Admin,%20saya%20mau%20pesan%20Toyota%20Avanza" target="_blank" class="btn-wa-kuning">
+                <i class="bi bi-whatsapp"></i> Pilih Mobil
+            </a>
         </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="kartu-mobil">
+            <div class="nama-mobil">HONDA JAZZ RS</div>
+            <div class="bar-harga">Rp 175.000</div>
+            
+            <img src="jazz.jpeg" class="foto-katalog" alt="Honda Jazz">
+            
+            <ul class="list-spek">
+                <li>Rp 175.000 / Jam</li>
+                <li>Minimal Order 1 Jam</li>
+                <li>Kapasitas 5 Penumpang</li>
+                <li>Tampilan Sporty & Gesit</li>
+            </ul>
+            
+            <a href="https://wa.me/6283801992917?text=Halo%20Admin,%20saya%20mau%20pesan%20Honda%20Jazz" target="_blank" class="btn-wa-kuning">
+                <i class="bi bi-whatsapp"></i> Pilih Mobil
+            </a>
+        </div>
+    </div>
+
+</div>
     </div>
     <div class="banner-kuning">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-7 text-center text-md-start mb-4 mb-md-0">
                     <h2 class="teks-banner">Hubungi sekarang dan<br>pesan mobil Anda</h2>
-                    <a href="https://wa.me/6285871038319" target="_blank" class="btn-hitam">
+                    <a href="https://wa.me/6283801992917" target="_blank" class="btn-hitam">
                         <i class="bi bi-whatsapp"></i> Hubungi kami
                     </a>
                 </div>
@@ -508,36 +437,39 @@
             </div>
         </div>
     </div>
-
-    <div class="container jarak-section">
-        <div class="row align-items-center g-5">
+<div id="testimoni" class="container jarak-section">
+    <div class="row align-items-center g-5">
+        
+        <div class="col-lg-5">
+            <h2 class="judul-section">Kepuasan pelanggan adalah<br>prioritas kami</h2>
+            <p class="teks-abu mb-4">Bagikan pengalaman seru Anda saat menggunakan layanan RentalinAJA untuk membantu pelanggan lain.</p>
             
-            <div class="col-lg-6">
-                <h2 class="judul-section">Kepuasan pelanggan adalah<br>prioritas kami</h2>
-                <p class="teks-abu">Kami selalu memastikan setiap kendaraan dalam kondisi prima sebelum disewakan. Banyak pelanggan yang puas dengan pelayanan kami dan kembali menyewa untuk perjalanan berikutnya.</p>
-                <p class="teks-abu">Komitmen kami adalah memberikan pengalaman berkendara yang aman, nyaman, dan bebas hambatan selama perjalanan Anda.</p>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="kotak-testimoni">
-                    <h3 style="font-weight: 800; margin-bottom: 25px;">Apa kata pelanggan</h3>
-                    <p style="color: #adb5bd; font-size: 16px; line-height: 1.8; margin-bottom: 30px;">
-                        "Sangat direkomendasikan! Mobilnya bersih, wangi, dan AC-nya sangat dingin. Proses serah terima kunci juga cepat tanpa ribet. Pasti akan sewa di RentalinAJA lagi!"
-                    </p>
-                    
-                    <div class="d-flex align-items-center">
-                        <img src="https://ui-avatars.com/api/?name=Andhito+Nax+Citayem&background=FFC107&color=000" alt="Andhito" class="foto-profil">
-                        <div>
-                            <h6 style="margin: 0; font-weight: bold; color: white;">Andhito Nax Citayem</h6>
-                            <p style="margin: 0; font-size: 14px; color: #adb5bd;">Pelanggan Setia</p>
-                        </div>
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 20px; background-color: #f8f9fa;">
+                <h5 class="fw-bold mb-3">Tulis Ulasan</h5>
+                <form id="form-ulasan">
+                    <div class="mb-3">
+                        <input type="text" id="input-nama" class="form-control" placeholder="Nama Lengkap" required>
                     </div>
+                    <div class="mb-3">
+                        <textarea id="input-pesan" class="form-control" rows="3" placeholder="Ceritakan pengalaman Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold rounded-pill">Kirim Ulasan</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="col-lg-7">
+            <div class="kotak-testimoni" style="min-height: 400px; overflow-y: auto;">
+                <h3 style="font-weight: 800; margin-bottom: 25px;">Apa kata pelanggan</h3>
+                
+                <div id="daftar-ulasan-container">
+                    <p class="text-muted small">Memuat ulasan terbaru...</p>
                 </div>
             </div>
-
         </div>
-    </div>
 
+    </div>
+</div>
     <footer class="footer">
         <p class="m-0">&copy; 2026 RentalinAJA. All Rights Reserved. Dibuat dengan bangga.</p>
     </footer>
