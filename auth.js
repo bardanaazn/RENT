@@ -1,3 +1,12 @@
+console.log("File auth.js berhasil dimuat!");
+
+// 1. ISI DENGAN DATA DARI SUPABASE KAMU (Project Settings > API)
+const SUPABASE_URL = 'https://xyzabc.supabase.co'; // Ganti dengan URL kamu
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1...'; // Ganti dengan Anon Key kamu
+
+// 2. DEFINISIKAN supabaseClient DI SINI
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 // --- BAGIAN TAMPILKAN ULASAN (READ) ---
 async function tampilkanUlasan() {
     try {
