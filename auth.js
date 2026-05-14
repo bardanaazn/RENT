@@ -141,14 +141,18 @@ window.onload = function() {
     const loggedInUser = localStorage.getItem('userNama'); 
 
     if (loggedInUser && authMenu) {
-        // Tampilan saat sudah login (Halo Nama + Dropdown/Logout)
         authMenu.innerHTML = `
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFA500; font-weight: bold;">
                     <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+                <!-- Kita tambahkan class dropdown-menu-dark agar backgroundnya hitam -->
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow border-secondary" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#" onclick="logout()" style="color: #FFA500;">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         `;
