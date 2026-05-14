@@ -143,19 +143,16 @@ window.onload = function() {
     if (loggedInUser && authMenu) {
         authMenu.innerHTML = `
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFA500; font-weight: bold;">
-                    <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
-                </a>
-                <!-- Kita tambahkan class dropdown-menu-dark agar backgroundnya hitam -->
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow border-secondary" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="#" onclick="logout()" style="color: #FFA500;">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        `;
+        <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFA500; font-weight: bold;">
+            <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="riwayat.html">Riwayat Pesanan</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+`;
     }
 };
 
@@ -220,5 +217,40 @@ async function buatPesanan() {
     } finally {
         btnPesan.innerText = "KONFIRMASI PESANAN";
         btnPesan.disabled = false;
+    }
+}
+
+// --- BAGIAN AMBIL RIWAYAT PESANAN (READ BY USER) ---
+async function ambilRiwayatPesanan(namaUser) {
+    try {
+        const { data: listPesanan, error } = await supabaseClient
+            .from('pesanan')
+            .select('*')
+            .eq('nama_pemesan', namaUser) // Filter: Hanya ambil pesanan milik user ini
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        const tabel = document.getElementById('tabelRiwayat');
+        if (listPesanan && listPesanan.length > 0) {
+            tabel.innerHTML = '';
+            listPesanan.forEach(item => {
+                // Tentukan warna badge berdasarkan status
+                const badgeClass = item.status === 'Menunggu Konfirmasi' ? 'badge-pending' : 'badge-success';
+                
+                tabel.innerHTML += `
+                    <tr>
+                        <td>${item.mobil}</td>
+                        <td>${item.durasi} Jam</td>
+                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+                        <td><span class="badge ${badgeClass}">${item.status}</span></td>
+                    </tr>
+                `;
+            });
+        } else {
+            tabel.innerHTML = '<tr><td colspan="4" class="text-center text-secondary">Belum ada riwayat pesanan.</td></tr>';
+        }
+    } catch (err) {
+        console.error("Gagal mengambil riwayat:", err.message);
     }
 }
