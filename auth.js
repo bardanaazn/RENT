@@ -159,11 +159,17 @@ window.onload = function() {
     }
 };
 
-// Fungsi Logout untuk menghapus sesi
+// Fungsi Logout untuk menghapus sesi dan mengalihkan halaman
 function logout() {
+    // 1. Hapus data sesi dari browser
     localStorage.removeItem('userNama');
     localStorage.removeItem('userEmail');
-    window.location.reload(); // Refresh halaman agar menu kembali ke "Login"
+
+    // 2. Tampilkan pesan perpisahan (opsional agar lebih ramah)
+    alert("Anda telah berhasil keluar.");
+
+    // 3. ALIKAN KE HALAMAN LOGIN
+    window.location.href = "login.html";
 }
 
 
