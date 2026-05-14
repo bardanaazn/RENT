@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Mobil - RentalinAJA</title>
+    <style>
+        body, html {
+            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; color: white;
+        }
+        .bg-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('avanza.jpg');
+            height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .booking-card {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            padding: 40px; border-radius: 15px; width: 100%; max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.2); text-align: center;
+        }
+        h2 { margin-bottom: 10px; color: #FFA500; }
+        select, input {
+            width: 100%; padding: 12px; margin: 10px 0; border-radius: 25px;
+            border: none; background: rgba(255, 255, 255, 0.9); box-sizing: border-box;
+        }
+        .btn-pesan {
+            width: 100%; padding: 12px; background-color: #FFA500; color: black;
+            border: none; border-radius: 25px; cursor: pointer; font-weight: bold;
+            font-size: 16px; margin-top: 20px; transition: 0.3s;
+        }
+        .btn-pesan:hover { background-color: #e69500; transform: scale(1.02); }
+        .harga-estimasi { font-size: 18px; font-weight: bold; margin-top: 15px; color: #FFA500; }
+    </style>
+</head>
+<body>
+
+<div class="bg-image">
+    <div class="booking-card">
+        <h2>Form Pemesanan</h2>
+        <p>Halo <span id="namaUser" style="font-weight: bold;">User</span>, silakan lengkapi pesanan Anda.</p>
+        
+        <form id="bookingForm">
+            <!-- Pilihan Mobil -->
+            <select id="pilihMobil" onchange="hitungHarga()">
+                <option value="" disabled selected>Pilih Armada</option>
+                <option value="Avanza">Toyota Avanza (Rp 150rb/jam)</option>
+                <option value="Jazz">Honda Jazz RS (Rp 175rb/jam)</option>
+            </select>
+            
+            <!-- Durasi Sewa -->
+            <input type="number" id="durasiSewa" placeholder="Durasi Sewa (Jam)" min="1" oninput="hitungHarga()">
+            
+            <div class="harga-estimasi">Total: <span id="totalDisplay">Rp 0</span></div>
+            
+            <button type="button" class="btn-pesan" onclick="buatPesanan()">KONFIRMASI PESANAN</button>
+        </form>
+        
+        <p style="margin-top: 20px;"><a href="index.html" style="color: white; text-decoration: none; font-size: 14px;">← Kembali ke Beranda</a></p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+    // Ambil nama user dari localStorage saat halaman dimuat
+    document.addEventListener("DOMContentLoaded", function() {
+        const user = localStorage.getItem('userNama');
+        if (!user) {
+            alert("Harap login terlebih dahulu!");
+            window.location.href = "login.html";
+        } else {
+            document.getElementById('namaUser').innerText = user;
+        }
+    });
+
+    function hitungHarga() {
+        const mobil = document.getElementById('pilihMobil').value;
+        const durasi = document.getElementById('durasiSewa').value;
+        let hargaPerJam = mobil === 'Avanza' ? 150000 : 175000;
+        
+        if (mobil && durasi) {
+            const total = hargaPerJam * durasi;
+            document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
+            return total;
+        }
+        return 0;
+    }
+</script>
+
+</body>
+</html>

@@ -162,5 +162,53 @@ function logout() {
     window.location.reload(); // Refresh halaman agar menu kembali ke "Login"
 }
 
+
 // Jalankan saat web dibuka
 tampilkanUlasan();
+
+// --- BAGIAN BUAT PESANAN (CREATE BOOKING) ---
+async function buatPesanan() {
+    // 1. Ambil data dari form booking.html
+    const pemesan = localStorage.getItem('userNama'); // Ambil dari sesi login
+    const mobil = document.getElementById('pilihMobil').value;
+    const durasi = document.getElementById('durasiSewa').value;
+    
+    // Pastikan fungsi hitungHarga() tersedia untuk mendapatkan total
+    const total = hitungHarga(); 
+
+    // Validasi sederhana agar tidak ada data kosong
+    if (!mobil || !durasi || durasi <= 0) {
+        alert("Harap pilih mobil dan isi durasi sewa dengan benar!");
+        return;
+    }
+
+    // Ambil tombol agar bisa diberi efek loading
+    const btnPesan = document.querySelector('.btn-pesan');
+    btnPesan.innerText = "Memproses Pesanan...";
+    btnPesan.disabled = true;
+
+    try {
+        // 2. Kirim data ke tabel 'pesanan' di Supabase
+        const { error } = await supabaseClient
+            .from('pesanan') // Nama tabel yang baru saja kita buat
+            .insert([{ 
+                nama_pemesan: pemesan, 
+                mobil: mobil, 
+                durasi: parseInt(durasi), 
+                total_harga: total,
+                status: "Menunggu Konfirmasi"
+            }]);
+
+        if (error) throw error;
+
+        // 3. Jika berhasil
+        alert("Pesanan Berhasil Dikirim! Kami akan segera menghubungi Anda.");
+        window.location.href = "index.html"; // Kembali ke beranda
+    } catch (err) {
+        alert("Gagal membuat pesanan: " + err.message);
+        console.error(err);
+    } finally {
+        btnPesan.innerText = "KONFIRMASI PESANAN";
+        btnPesan.disabled = false;
+    }
+}
