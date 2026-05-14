@@ -26,16 +26,25 @@ async function handleLogin() {
             return;
         }
 
-        // SIMPAN SESI LOGIN (Ini yang membuat nama muncul di Navbar)
-        localStorage.setItem('userNama', user.nama);
-        localStorage.setItem('userEmail', user.email);
+        if (user) {
+    localStorage.setItem('userNama', user.nama);
+    localStorage.setItem('userEmail', user.email);
+    localStorage.setItem('userRole', user.role); // TAMBAHKAN INI
 
-        alert("Selamat datang kembali, " + user.nama);
-        window.location.href = "index.html"; // Kembali ke halaman utama
-    } catch (err) {
-        alert("Terjadi kesalahan: " + err.message);
+    alert("Selamat datang, " + user.nama);
+    
+    // Opsional: Jika dia admin, langsung arahkan ke admin.html
+    if (user.role === 'admin') {
+            window.location.href = "admin.html";
+        } else {
+            window.location.href = "index.html";
+        }
+      } // Penutup if (user)
+    } catch (err) { // Tambahkan penutup try dan blok catch
+        console.error(err);
+        alert("Terjadi kesalahan saat login.");
     }
-}
+} // Penutup fungsi handleLogin
 
 // --- BAGIAN REGISTER (PROSES DAFTAR) ---
 async function handleRegister() {
@@ -139,20 +148,28 @@ if (formUlasan) {
 window.onload = function() {
     const authMenu = document.getElementById('authMenu');
     const loggedInUser = localStorage.getItem('userNama'); 
+    const userRole = localStorage.getItem('userRole'); // Ambil role
 
     if (loggedInUser && authMenu) {
+        // Cek jika admin, tambahkan menu Admin Panel
+        let adminLink = "";
+        if (userRole === 'admin') {
+            adminLink = `<li><a class="dropdown-item fw-bold text-warning" href="admin.html">Admin Panel</a></li>`;
+        }
+
         authMenu.innerHTML = `
             <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFA500; font-weight: bold;">
-            <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="riwayat.html">Riwayat Pesanan</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
-        </ul>
-    </div>
-`;
+                <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFA500; font-weight: bold;">
+                    <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark shadow" aria-labelledby="navbarDropdown">
+                    ${adminLink} 
+                    <li><a class="dropdown-item" href="riwayat.html">Riwayat Pesanan</a></li>
+                    <li><hr class="dropdown-divider border-secondary"></li>
+                    <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </div>
+        `;
     }
 };
 

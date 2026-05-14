@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - RentalinAJA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: white; font-family: 'Segoe UI', sans-serif; }
+        .admin-card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border-radius: 15px; padding: 30px; margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h2 { color: #FFA500; }
+        .table { color: white; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="admin-card shadow">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Panel Kelola Pesanan</h2>
+            <a href="index.html" class="btn btn-sm btn-outline-secondary">Ke Beranda</a>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Pemesan</th>
+                        <th>Mobil</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelAdmin">
+                    <!-- Data pesanan muncul di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+    // 1. CEK KEAMANAN: Jalankan ini SEGERA sebelum mengambil data
+    document.addEventListener("DOMContentLoaded", () => {
+        const userRole = localStorage.getItem('userRole'); // Ambil role dari localStorage
+        
+        if (userRole !== 'admin') {
+            // Jika bukan admin, tendang ke index.html
+            alert("Akses Ditolak! Anda bukan Admin.");
+            window.location.href = "index.html";
+        } else {
+            // Jika benar admin, baru panggil datanya
+            ambilSemuaPesanan();
+        }
+    });
+
+    async function ambilSemuaPesanan() {
+        try {
+            const { data: semuaPesanan, error } = await supabaseClient
+                .from('pesanan')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            const wadah = document.getElementById('tabelAdmin');
+            wadah.innerHTML = '';
+
+            semuaPesanan.forEach(item => {
+                wadah.innerHTML += `
+                    <tr>
+                        <td>${item.nama_pemesan}</td>
+                        <td>${item.mobil}</td>
+                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+                        <td><span class="badge bg-secondary">${item.status}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-success" onclick="updateStatus('${item.id}', 'Disetujui')">Setujui</button>
+                            <button class="btn btn-sm btn-info" onclick="updateStatus('${item.id}', 'Selesai')">Selesai</button>
+                            <button class="btn btn-sm btn-danger" onclick="hapusPesanan('${item.id}')">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async function updateStatus(idPesanan, statusBaru) {
+        try {
+            const { error } = await supabaseClient
+                .from('pesanan')
+                .update({ status: statusBaru })
+                .eq('id', idPesanan);
+
+            if (error) throw error;
+            alert("Status berhasil diperbarui!");
+            ambilSemuaPesanan(); // Refresh tabel
+        } catch (err) {
+            alert("Gagal update: " + err.message);
+        }
+    }
+
+    async function hapusPesanan(id) {
+    if (confirm("Yakin ingin menghapus pesanan ini?")) {
+        try {
+            const { error, count } = await supabaseClient
+                .from('pesanan')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+
+            alert("Pesanan berhasil dihapus dari database!");
+            ambilSemuaPesanan(); // Refresh tabel
+        } catch (err) {
+            alert("Gagal menghapus: " + err.message);
+            console.error(err);
+        }
+    }
+}
+</script>
+</body>
+</html>
