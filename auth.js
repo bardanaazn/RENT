@@ -47,7 +47,7 @@ async function handleRegister() {
 
     try {
         const { error } = await supabaseClient
-            .from('users') // Pastikan kamu punya tabel 'users' di Supabase
+            .from('user') // Pastikan kamu punya tabel 'users' di Supabase
             .insert([{ 
                 nama: nama, 
                 email: email, 
