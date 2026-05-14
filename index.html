@@ -234,6 +234,26 @@
             padding: 25px 0;
             font-size: 14px;
         }
+
+        .btn-login-nav {
+            background-color: #FFA500; /* Warna oranye sesuai branding */
+            color: black !important;
+            padding: 10px 20px; /* Menyesuaikan agar lebih oval seperti gambar */
+            border-radius: 40px; /* Membuat sudut membulat sempurna (oval) */
+            font-weight: 500; /* Membuat teks lebih tebal */
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-login-nav:hover {
+            background-color: #FFC107; /* Menggunakan variabel kuning saat hover */
+            transform: scale(1.05);
+        }
+        .user-name {
+            color: #FFA500;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -248,6 +268,9 @@
                         <li class="nav-item"><a class="nav-link" href="#tentang-kami">Tentang kami</a></li>
                         <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
                         <li class="nav-item"><a class="nav-link" href="#daftar-mobil">Mobil</a></li>
+                        <li id="authMenu" class="nav-item d-flex align-items-center ms-lg-3">
+    <a href="login.html" class="btn-login-nav">Login</a>
+</li>
                     </ul>
                 </div>
             </div>

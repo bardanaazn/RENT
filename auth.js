@@ -7,6 +7,65 @@ const SUPABASE_KEY = 'sb_publishable_H-DcuiBuFd_reOG77oQ5Jg_Pa-01F4J'; // Ganti 
 // 2. DEFINISIKAN supabaseClient DI SINI
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+
+// --- BAGIAN LOGIN (PROSES MASUK) ---
+async function handleLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const { data: user, error } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .eq('password', password)
+            .single();
+
+        if (error || !user) {
+            alert("Email atau Password salah!");
+            return;
+        }
+
+        // SIMPAN SESI LOGIN (Ini yang membuat nama muncul di Navbar)
+        localStorage.setItem('userNama', user.nama);
+        localStorage.setItem('userEmail', user.email);
+
+        alert("Selamat datang kembali, " + user.nama);
+        window.location.href = "index.html"; // Kembali ke halaman utama
+    } catch (err) {
+        alert("Terjadi kesalahan: " + err.message);
+    }
+}
+
+// --- BAGIAN REGISTER (PROSES DAFTAR) ---
+async function handleRegister() {
+    const nama = document.getElementById('regNama').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const whatsapp = document.getElementById('regWA').value;
+    const alamat = document.getElementById('regAlamat').value;
+
+    try {
+        const { error } = await supabaseClient
+            .from('users') // Pastikan kamu punya tabel 'users' di Supabase
+            .insert([{ 
+                nama: nama, 
+                email: email, 
+                password: password, // Catatan: Sebaiknya gunakan Auth bawaan Supabase untuk keamanan
+                whatsapp: whatsapp, 
+                alamat: alamat 
+            }]);
+
+        if (error) throw error;
+
+        alert("Pendaftaran Berhasil! Silakan Login.");
+        window.location.href = "login.html"; // Arahkan ke halaman login
+    } catch (err) {
+        alert("Gagal Daftar: " + err.message);
+    }
+}
+
+
 // --- BAGIAN TAMPILKAN ULASAN (READ) ---
 async function tampilkanUlasan() {
     try {
@@ -74,6 +133,33 @@ if (formUlasan) {
             btnKirim.disabled = false;
         }
     });
+}
+
+// Fungsi ini dijalankan setiap kali halaman di-refresh
+window.onload = function() {
+    const authMenu = document.getElementById('authMenu');
+    const loggedInUser = localStorage.getItem('userNama'); 
+
+    if (loggedInUser && authMenu) {
+        // Tampilan saat sudah login (Halo Nama + Dropdown/Logout)
+        authMenu.innerHTML = `
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle user-name" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> Halo, ${loggedInUser}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </div>
+        `;
+    }
+};
+
+// Fungsi Logout untuk menghapus sesi
+function logout() {
+    localStorage.removeItem('userNama');
+    localStorage.removeItem('userEmail');
+    window.location.reload(); // Refresh halaman agar menu kembali ke "Login"
 }
 
 // Jalankan saat web dibuka

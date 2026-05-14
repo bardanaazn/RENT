@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - RentalinAJA</title>
+    <style>
+        /* Mengambil konsep dari image_86b776.jpg */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+        }
+
+        /* Latar belakang menggunakan hero image yang digelapkan */
+        .bg-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('avanza.jpg');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reg-card {
+            background: rgba(255, 255, 255, 0.1); /* Transparan modern */
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 25px; /* Lonjong sesuai style tombol utama */
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Tombol menyesuaikan dengan warna oranye di image_86b776.jpg */
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            background-color: #FFA500; /* Warna Oranye RentalinAJA */
+            color: black;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #e69500;
+            transform: scale(1.05);
+        }
+
+        .footer-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .footer-link a {
+            color: #FFA500;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-image">
+    <div class="reg-card">
+        <h2>Daftar Akun</h2>
+        <p style="margin-bottom: 20px; font-size: 14px;">Mulai perjalanan Anda di Tangerang bersama kami.</p>
+        
+        <form id="registerForm">
+            <input type="text" id="regNama" placeholder="Nama Lengkap" required>
+            <input type="email" id="regEmail" placeholder="Email" required>
+            <input type="password" id="regPassword" placeholder="Password" required>
+            <input type="tel" id="regWA" placeholder="WhatsApp (Aktif)" required>
+            <input type="text" id="regAlamat" placeholder="Alamat di Tangerang" required>
+            
+            <button type="button" class="btn-register" onclick="handleRegister()">DAFTAR SEKARANG</button>
+        </form>
+
+        <div class="footer-link">
+            Sudah punya akun? <a href="login.html">Login</a>
+        </div>
+    </div>
+</div>
+
+<script src="auth.js"></script>
+
+</body>
+</html>
