@@ -215,8 +215,37 @@ async function buatPesanan() {
 
         if (error) throw error;
 
-        alert("Pesanan Berhasil Dikirim! Kami akan segera menghubungi Anda.");
-        window.location.href = "index.html"; 
+        // --- MODIFIKASI BARU: POP-UP NOTIFIKASI WHATSAPP DI TENGAH LAYAR ---
+        const nomorAdmin = "628123456789"; // 🌟 GANTI DENGAN NOMOR WA KAMU DI SINI
+        const pesanWA = encodeURIComponent(
+            `Halo Admin RentalinAJA, saya ingin mengonfirmasi pesanan saya.\n\n` +
+            `Nama: ${pemesan}\n` +
+            `Mobil: ${mobil}\n` +
+            `Durasi: ${durasi} ${total >= 1000000 ? 'Hari' : 'Jam'}\n` +
+            `Total: Rp ${total.toLocaleString('id-ID')}\n\n` +
+            `Mohon segera diproses ya, terima kasih!`
+        );
+        const linkWhatsApp = `https://wa.me/${nomorAdmin}?text=${pesanWA}`;
+
+        // Tampilkan pop-up keren di tengah layar
+        Swal.fire({
+            title: "Pesanan Berhasil Dikirim!",
+            html: `Halo <b>${pemesan}</b>, pesanan Anda untuk mobil <b>${mobil}</b> telah tercatat di sistem.<br><br>Silakan klik tombol di bawah untuk segera konfirmasi ke WhatsApp Admin agar unit langsung disiapkan.`,
+            icon: "success",
+            background: "#1e1e1e", // Menyesuaikan tema gelap web kamu
+            color: "#ffffff",
+            confirmButtonColor: "#25D366", // Warna hijau khas WhatsApp
+            confirmButtonText: '<i class="bi bi-whatsapp"></i> Hubungi Admin via WA',
+            allowOutsideClick: false // Pelanggan wajib klik tombolnya
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Buka chat WhatsApp di tab baru
+                window.open(linkWhatsApp, '_blank');
+                // Alihkan halaman utama web ke index.html atau riwayat.html
+                window.location.href = "riwayat.html"; 
+            }
+        });
+
     } catch (err) {
         alert("Gagal membuat pesanan: " + err.message);
         console.error(err);
@@ -224,7 +253,6 @@ async function buatPesanan() {
         btnPesan.innerText = "KONFIRMASI PESANAN";
         btnPesan.disabled = false;
     }
-}
 
 // --- BAGIAN AMBIL RIWAYAT PESANAN (READ BY USER) ---
 async function ambilRiwayatPesanan(namaUser) {
@@ -242,18 +270,31 @@ async function ambilRiwayatPesanan(namaUser) {
             tabel.innerHTML = '';
             listPesanan.forEach(item => {
                 const badgeClass = item.status === 'Menunggu Konfirmasi' ? 'badge-pending' : 'badge-success';
-                
-                // DETEKSI SATUAN WAKTU DINAMIS BERDASARKAN TOTAL HARGA
                 const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
 
+                // Buat link WA manual untuk baris riwayat ini
+                const nomorAdmin = "628123456789"; // 🌟 GANTI DENGAN NOMOR WA KAMU (SAMA SEPERTI DI ATAS)
+                const pesanRiwayat = encodeURIComponent(
+                    `Halo Admin RentalinAJA, saya ingin menanyakan status pesanan saya.\n\n` +
+                    `Mobil: ${item.mobil}\n` +
+                    `Durasi: ${item.durasi} ${satuanWaktu}\n` +
+                    `Status Saat Ini: ${item.status}`
+                );
+                const linkWARiwayat = `https://wa.me/${nomorAdmin}?text=${pesanRiwayat}`;
+
                 tabel.innerHTML += `
-    <tr>
-        <td>${item.mobil}</td>
-        <td>${item.durasi} ${satuanWaktu}</td>
-        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
-        <td><span class="badge ${badgeClass}">${item.status}</span></td>
-    </tr>
-`;
+                    <tr>
+                        <td>${item.mobil}</td>
+                        <td>${item.durasi} ${satuanWaktu}</td>
+                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+                        <td><span class="badge ${badgeClass}">${item.status}</span></td>
+                        <td>
+                            <a href="${linkWARiwayat}" target="_blank" class="btn btn-sm btn-success" style="background-color: #25D366; border: none; font-weight: bold;">
+                                Hubungi Admin
+                            </a>
+                        </td>
+                    </tr>
+                `;
             });
         } else {
             tabel.innerHTML = '<tr><td colspan="4" class="text-center text-secondary">Belum ada riwayat pesanan.</td></tr>';
