@@ -6,12 +6,33 @@
     <title>Booking Mobil - RentalinAJA</title>
     <style>
         body, html {
-            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; color: white;
+            /* Menggunakan min-height dan memastikan tidak ada margin sisa */
+            min-height: 100vh; 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+            color: white;
+            background-color: #121212; /* Warna dasar cadangan jika gambar lambat dimuat */
         }
+
         .bg-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('avanza.jpg');
-            height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;
-            display: flex; align-items: center; justify-content: center;
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-size: cover;
+            background-attachment: fixed; /* 🌟 KUNCI: Membuat gambar latar terkunci kokoh saat pop-up muncul */
+            
+            /* Memaksa elemen selalu memenuhi satu layar penuh */
+            min-height: 100vh; 
+            width: 100%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        /* --- PENGAMAN TAMBAHAN UNTUK KHUSUS SWEETALERT2 --- */
+        html.swal2-shown, body.swal2-shown {
+            height: 100% !important;
+            overflow: hidden !important; /* Mencegah layar bergeser/scrolling liar saat pop-up aktif */
         }
         .booking-card {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
