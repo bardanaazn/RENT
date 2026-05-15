@@ -227,16 +227,31 @@ async function buatPesanan() {
         );
         const linkWhatsApp = `https://wa.me/${nomorAdmin}?text=${pesanWA}`;
 
-        // Tampilkan pop-up keren di tengah layar
+        // Tampilkan pop-up keren di tengah layar (VERSI RAPI)
         Swal.fire({
-            title: "Pesanan Berhasil Dikirim!",
-            html: `Halo <b>${pemesan}</b>, pesanan Anda untuk mobil <b>${mobil}</b> telah tercatat di sistem.<br><br>Silakan klik tombol di bawah untuk segera konfirmasi ke WhatsApp Admin agar unit langsung disiapkan.`,
+            title: "<span style='color: #FFA500; font-size: 26px; font-weight: bold;'>Pesanan Berhasil Dikirim!</span>",
+            html: `
+                <div style="font-size: 15px; line-height: 1.6; margin-top: 10px; color: #ddd;">
+                    Halo <b>${pemesan}</b>, pesanan Anda untuk mobil <b>${mobil}</b> telah tercatat di sistem.<br><br>
+                    Silakan klik tombol di bawah untuk segera konfirmasi ke WhatsApp Admin agar unit langsung disiapkan.
+                </div>
+            `,
             icon: "success",
+            iconColor: "#25D366", // Mengubah centang menjadi hijau khas WA agar senada
             background: "#1e1e1e", 
             color: "#ffffff",
+            width: "500px", // 🌟 BARU: Memperlebar kotak agar teks dan tombol tidak berdesakan
             confirmButtonColor: "#25D366", 
-            confirmButtonText: '<i class="bi bi-whatsapp"></i> Hubungi Admin via WA',
-            allowOutsideClick: false 
+            confirmButtonText: '<span style="padding: 5px 15px; font-size: 16px; font-weight: bold; display: inline-block;">Hubungi Admin via WA</span>', // 🌟 BARU: Padding agar tombol tebal proporsional
+            allowOutsideClick: false,
+            didOpen: () => {
+                // 🌟 BARU: Menambahkan efek bayangan halus pada pop-up agar kontras dengan background belakang
+                const popup = Swal.getPopup();
+                if (popup) {
+                    popup.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.7)";
+                    popup.style.borderRadius = "15px";
+                }
+            }
         }).then((result) => {
             if (result.isConfirmed) {
                 window.open(linkWhatsApp, '_blank');
