@@ -191,7 +191,6 @@ async function buatPesanan() {
         return;
     }
 
-    // Cukup panggil satu kali di sini
     const total = hitungHarga(); 
 
     if (total <= 0) {
@@ -199,13 +198,12 @@ async function buatPesanan() {
         return;
     }
 
-    const nominalDP = total * 0.30;
-
     const btnPesan = document.querySelector('.btn-pesan');
     btnPesan.innerText = "Memproses Pesanan...";
     btnPesan.disabled = true;
 
     try {
+        // Kirim data murni tanpa kolom uang_dp
         const { error } = await supabaseClient
             .from('pesanan') 
             .insert([{ 
@@ -213,13 +211,12 @@ async function buatPesanan() {
                 mobil: mobil, 
                 durasi: parseInt(durasi), 
                 total_harga: total,
-                uang_dp: nominalDP, 
                 status: "Menunggu Konfirmasi"
             }]);
 
         if (error) throw error;
 
-        alert("Pesanan Berhasil Dikirim! Sila lakukan pembayaran DP sebesar Rp " + nominalDP.toLocaleString('id-ID') + ". Kami akan segera menghubungi Anda.");
+        alert("Pesanan Berhasil Dikirim! Kami akan segera menghubungi Anda.");
         window.location.href = "index.html"; 
     } catch (err) {
         alert("Gagal membuat pesanan: " + err.message);
