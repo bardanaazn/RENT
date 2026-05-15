@@ -216,7 +216,7 @@ async function buatPesanan() {
         if (error) throw error;
 
         // --- MODIFIKASI BARU: POP-UP NOTIFIKASI WHATSAPP DI TENGAH LAYAR ---
-        const nomorAdmin = "628123456789"; // 🌟 GANTI DENGAN NOMOR WA KAMU DI SINI
+        const nomorAdmin = "6285871038319"; // 🌟 GANTI DENGAN NOMOR WA KAMU DI SINI
         const pesanWA = encodeURIComponent(
             `Halo Admin RentalinAJA, saya ingin mengonfirmasi pesanan saya.\n\n` +
             `Nama: ${pemesan}\n` +
@@ -272,7 +272,7 @@ async function ambilRiwayatPesanan(namaUser) {
                 const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
 
                 // Buat link WA manual untuk baris riwayat ini
-                const nomorAdmin = "628123456789"; // 🌟 GANTI DENGAN NOMOR WA KAMU (SAMA SEPERTI DI ATAS)
+                const nomorAdmin = "6285871038319"; // 🌟 GANTI DENGAN NOMOR WA KAMU (SAMA SEPERTI DI ATAS)
                 const pesanRiwayat = encodeURIComponent(
                     `Halo Admin RentalinAJA, saya ingin menanyakan status pesanan saya.\n\n` +
                     `Mobil: ${item.mobil}\n` +
