@@ -247,13 +247,13 @@ async function ambilRiwayatPesanan(namaUser) {
                 const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
 
                 tabel.innerHTML += `
-                    <tr>
-                        <td>${item.mobil}</td>
-                        <td>${item.durasi} ${satuanWaktu}</td>
-                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
-                        <td><span class="badge ${badgeClass}">${item.status}</span></td>
-                    </tr>
-                `;
+    <tr>
+        <td>${item.mobil}</td>
+        <td>${item.durasi} ${satuanWaktu}</td>
+        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+        <td><span class="badge ${badgeClass}">${item.status}</span></td>
+    </tr>
+`;
             });
         } else {
             tabel.innerHTML = '<tr><td colspan="4" class="text-center text-secondary">Belum ada riwayat pesanan.</td></tr>';
