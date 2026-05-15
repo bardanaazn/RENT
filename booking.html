@@ -83,27 +83,27 @@
 
     // LOGIKA MATEMATIKA MULTI-TARIF (JAM & HARI)
     function hitungHarga() {
-    const mobil = document.getElementById('pilihMobil').value;
-    const tipe = document.getElementById('tipeDurasi').value;
-    const durasi = parseInt(document.getElementById('durasiSewa').value) || 0;
-    
-    let tarif = 0;
+        const mobil = document.getElementById('pilihMobil').value;
+        const tipe = document.getElementById('tipeDurasi').value;
+        const durasi = parseInt(document.getElementById('durasiSewa').value) || 0;
+        
+        let tarif = 0;
 
-    if (mobil === 'Avanza') {
-        tarif = (tipe === 'Jam') ? 150000 : 1000000;
-    } else if (mobil === 'Jazz') {
-        tarif = (tipe === 'Jam') ? 175000 : 1100000;
+        if (mobil === 'Avanza') {
+            tarif = (tipe === 'Jam') ? 150000 : 1000000;
+        } else if (mobil === 'Jazz') {
+            tarif = (tipe === 'Jam') ? 175000 : 1100000;
+        }
+        
+        if (mobil && durasi > 0) {
+            const total = tarif * durasi;
+            document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
+            return total;
+        }
+        
+        document.getElementById('totalDisplay').innerText = "Rp 0";
+        return 0;
     }
-    
-    if (mobil && durasi > 0) {
-        const total = tarif * durasi;
-        document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
-        return total;
-    }
-    
-    document.getElementById('totalDisplay').innerText = "Rp 0";
-    return 0;
-}
 </script>
 
 </body>

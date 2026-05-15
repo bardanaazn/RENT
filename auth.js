@@ -203,7 +203,6 @@ async function buatPesanan() {
     btnPesan.disabled = true;
 
     try {
-        // Kirim data murni tanpa kolom uang_dp
         const { error } = await supabaseClient
             .from('pesanan') 
             .insert([{ 
@@ -244,7 +243,7 @@ async function ambilRiwayatPesanan(namaUser) {
             listPesanan.forEach(item => {
                 const badgeClass = item.status === 'Menunggu Konfirmasi' ? 'badge-pending' : 'badge-success';
                 
-                // MENGUBAH TEKS MENJADI VARIABEL SATUAN WAKTU DINAMIS
+                // DETEKSI SATUAN WAKTU DINAMIS BERDASARKAN TOTAL HARGA
                 const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
 
                 tabel.innerHTML += `
@@ -253,11 +252,6 @@ async function ambilRiwayatPesanan(namaUser) {
                         <td>${item.durasi} ${satuanWaktu}</td>
                         <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
                         <td><span class="badge ${badgeClass}">${item.status}</span></td>
-                    
-                    <td>
-                        Total: Rp ${item.total_harga.toLocaleString('id-ID')}<br>
-                        <small class="text-warning">DP: Rp ${(item.uang_dp || 0).toLocaleString('id-ID')}</small>
-                        </td>
                     </tr>
                 `;
             });
