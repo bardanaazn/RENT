@@ -175,11 +175,12 @@ window.onload = function() {
 
 // Fungsi Logout untuk menghapus sesi dan mengalihkan halaman
 function logout() {
-    // 1. Hapus data sesi dari browser
+    // 1. Hapus seluruh data sesi dari browser termasuk role
     localStorage.removeItem('userNama');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRole'); // <--- TAMBAHKAN INI AGAR ROLE TERHAPUS BERSIH
 
-    // 2. Tampilkan pesan perpisahan (opsional agar lebih ramah)
+    // 2. Tampilkan pesan perpisahan
     alert("Anda telah berhasil keluar.");
 
     // 3. ALIKAN KE HALAMAN LOGIN
