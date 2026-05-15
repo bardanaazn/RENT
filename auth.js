@@ -232,16 +232,14 @@ async function buatPesanan() {
             title: "Pesanan Berhasil Dikirim!",
             html: `Halo <b>${pemesan}</b>, pesanan Anda untuk mobil <b>${mobil}</b> telah tercatat di sistem.<br><br>Silakan klik tombol di bawah untuk segera konfirmasi ke WhatsApp Admin agar unit langsung disiapkan.`,
             icon: "success",
-            background: "#1e1e1e", // Menyesuaikan tema gelap web kamu
+            background: "#1e1e1e", 
             color: "#ffffff",
-            confirmButtonColor: "#25D366", // Warna hijau khas WhatsApp
+            confirmButtonColor: "#25D366", 
             confirmButtonText: '<i class="bi bi-whatsapp"></i> Hubungi Admin via WA',
-            allowOutsideClick: false // Pelanggan wajib klik tombolnya
+            allowOutsideClick: false 
         }).then((result) => {
             if (result.isConfirmed) {
-                // Buka chat WhatsApp di tab baru
                 window.open(linkWhatsApp, '_blank');
-                // Alihkan halaman utama web ke index.html atau riwayat.html
                 window.location.href = "riwayat.html"; 
             }
         });
@@ -253,6 +251,7 @@ async function buatPesanan() {
         btnPesan.innerText = "KONFIRMASI PESANAN";
         btnPesan.disabled = false;
     }
+} // 🌟 SINKRONISASI: Kurung kurawal penutup fungsi buatPesanan yang hilang sudah dipasang di sini!
 
 // --- BAGIAN AMBIL RIWAYAT PESANAN (READ BY USER) ---
 async function ambilRiwayatPesanan(namaUser) {
@@ -297,7 +296,7 @@ async function ambilRiwayatPesanan(namaUser) {
                 `;
             });
         } else {
-            tabel.innerHTML = '<tr><td colspan="4" class="text-center text-secondary">Belum ada riwayat pesanan.</td></tr>';
+            tabel.innerHTML = '<tr><td colspan="5" class="text-center text-secondary">Belum ada riwayat pesanan.</td></tr>';
         }
     } catch (err) {
         console.error("Gagal mengambil riwayat:", err.message);
