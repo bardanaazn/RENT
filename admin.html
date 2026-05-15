@@ -99,6 +99,9 @@
                             <button class="btn btn-sm btn-success" onclick="updateStatus('${item.id}', 'Disetujui')">Setujui</button>
                             <button class="btn btn-sm btn-info" onclick="updateStatus('${item.id}', 'Selesai')">Selesai</button>
                             <button class="btn btn-sm btn-danger" onclick="hapusPesanan('${item.id}')">Hapus</button>
+                        <td>
+                            Total: Rp ${item.total_harga.toLocaleString('id-ID')}<br>
+                            <small class="text-warning">DP (30%): Rp ${(item.uang_dp || 0).toLocaleString('id-ID')}</small>
                         </td>
                     </tr>
                 `;

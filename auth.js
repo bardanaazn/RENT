@@ -191,12 +191,15 @@ async function buatPesanan() {
         return;
     }
 
-    const total = hitungHarga(); // Dipanggil satu kali saja
+    // Cukup panggil satu kali di sini
+    const total = hitungHarga(); 
 
     if (total <= 0) {
         alert("Terjadi kesalahan perhitungan harga. Harap ulangi proses!");
         return;
     }
+
+    const nominalDP = total * 0.30;
 
     const btnPesan = document.querySelector('.btn-pesan');
     btnPesan.innerText = "Memproses Pesanan...";
@@ -210,12 +213,13 @@ async function buatPesanan() {
                 mobil: mobil, 
                 durasi: parseInt(durasi), 
                 total_harga: total,
+                uang_dp: nominalDP, 
                 status: "Menunggu Konfirmasi"
             }]);
 
         if (error) throw error;
 
-        alert("Pesanan Berhasil Dikirim! Kami akan segera menghubungi Anda.");
+        alert("Pesanan Berhasil Dikirim! Sila lakukan pembayaran DP sebesar Rp " + nominalDP.toLocaleString('id-ID') + ". Kami akan segera menghubungi Anda.");
         window.location.href = "index.html"; 
     } catch (err) {
         alert("Gagal membuat pesanan: " + err.message);
@@ -252,6 +256,11 @@ async function ambilRiwayatPesanan(namaUser) {
                         <td>${item.durasi} ${satuanWaktu}</td>
                         <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
                         <td><span class="badge ${badgeClass}">${item.status}</span></td>
+                    
+                    <td>
+                        Total: Rp ${item.total_harga.toLocaleString('id-ID')}<br>
+                        <small class="text-warning">DP: Rp ${(item.uang_dp || 0).toLocaleString('id-ID')}</small>
+                        </td>
                     </tr>
                 `;
             });

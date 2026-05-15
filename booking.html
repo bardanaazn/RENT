@@ -54,6 +54,10 @@
             <input type="number" id="durasiSewa" placeholder="Durasi Sewa (Jam)" min="1" oninput="hitungHarga()">
             
             <div class="harga-estimasi">Total: <span id="totalDisplay">Rp 0</span></div>
+
+            <div class="mt-2 text-warning fw-bold" id="infoDP" style="display: none; margin-top: 10px; font-size: 16px;">
+                Wajib DP (30%): <span id="tampilDP">Rp 0</span>
+            </div>
             
             <button type="button" class="btn-pesan" onclick="buatPesanan()">KONFIRMASI PESANAN</button>
         </form>
@@ -83,29 +87,40 @@
 
     // LOGIKA MATEMATIKA MULTI-TARIF (JAM & HARI)
     function hitungHarga() {
-        const mobil = document.getElementById('pilihMobil').value;
-        const tipe = document.getElementById('tipeDurasi').value;
-        const durasi = parseInt(document.getElementById('durasiSewa').value) || 0;
-        
-        let tarif = 0;
+    const mobil = document.getElementById('pilihMobil').value;
+    const durasi = document.getElementById('durasiSewa').value;
+    const tipeDurasi = document.getElementById('tipeDurasi').value;
+    let hargaPerUnit = 0;
 
-        if (mobil === 'Avanza') {
-            // Jika tipe "Jam" pake 150rb, jika "Hari" pake 1 Juta
-            tarif = (tipe === 'Jam') ? 150000 : 1000000;
-        } else if (mobil === 'Jazz') {
-            // Jika tipe "Jam" pake 175rb, jika "Hari" pake 1.1 Juta
-            tarif = (tipe === 'Jam') ? 175000 : 1100000;
-        }
-        
-        if (mobil && durasi > 0) {
-            const total = tarif * durasi;
-            document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
-            return total;
-        }
-        
-        document.getElementById('totalDisplay').innerText = "Rp 0";
-        return 0;
+    if (mobil === 'Avanza') {
+        hargaPerUnit = tipeDurasi === 'Hari' ? 450000 : 60000;
+    } else if (mobil === 'Xenia') {
+        hargaPerUnit = tipeDurasi === 'Hari' ? 400000 : 55000;
+    } else if (mobil === 'Brio') {
+        hargaPerUnit = tipeDurasi === 'Hari' ? 350000 : 50000;
+    } else if (mobil === 'Jazz') {
+        hargaPerUnit = tipeDurasi === 'Hari' ? 500000 : 70000;
     }
+
+    const total = hargaPerUnit * parseInt(durasi || 0);
+    
+    // SINKRONISASI ID: Menggunakan 'totalDisplay' sesuai HTML Anda
+    document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
+
+    // Menghitung dan menampilkan info DP 30%
+    const infoDP = document.getElementById('infoDP');
+    const tampilDP = document.getElementById('tampilDP');
+    
+    if (total > 0) {
+        const dp = total * 0.30;
+        tampilDP.innerText = "Rp " + dp.toLocaleString('id-ID');
+        infoDP.style.display = 'block';
+    } else {
+        infoDP.style.display = 'none';
+    }
+
+    return total;
+}
 </script>
 
 </body>
