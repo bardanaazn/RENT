@@ -227,29 +227,42 @@ async function buatPesanan() {
         );
         const linkWhatsApp = `https://wa.me/${nomorAdmin}?text=${pesanWA}`;
 
-        // Tampilkan pop-up keren di tengah layar (VERSI RAPI)
+        // Tampilkan pop-up dengan pemaksaan layout CSS (GARANSI RAPI)
         Swal.fire({
-            title: "<span style='color: #FFA500; font-size: 26px; font-weight: bold;'>Pesanan Berhasil Dikirim!</span>",
+            title: "<span style='color: #FFA500; font-size: 26px; font-weight: bold; display: block; margin-top: 10px;'>Pesanan Berhasil Dikirim!</span>",
             html: `
-                <div style="font-size: 15px; line-height: 1.6; margin-top: 10px; color: #ddd;">
+                <div style="font-size: 15px; line-height: 1.6; color: #ddd; padding: 0 10px; text-align: center;">
                     Halo <b>${pemesan}</b>, pesanan Anda untuk mobil <b>${mobil}</b> telah tercatat di sistem.<br><br>
                     Silakan klik tombol di bawah untuk segera konfirmasi ke WhatsApp Admin agar unit langsung disiapkan.
                 </div>
             `,
             icon: "success",
-            iconColor: "#25D366", // Mengubah centang menjadi hijau khas WA agar senada
+            iconColor: "#25D366",
             background: "#1e1e1e", 
             color: "#ffffff",
-            width: "500px", // 🌟 BARU: Memperlebar kotak agar teks dan tombol tidak berdesakan
-            confirmButtonColor: "#25D366", 
-            confirmButtonText: '<span style="padding: 5px 15px; font-size: 16px; font-weight: bold; display: inline-block;">Hubungi Admin via WA</span>', // 🌟 BARU: Padding agar tombol tebal proporsional
             allowOutsideClick: false,
+            confirmButtonText: 'Hubungi Admin via WA',
             didOpen: () => {
-                // 🌟 BARU: Menambahkan efek bayangan halus pada pop-up agar kontras dengan background belakang
+                // 1. Ambil elemen box utama SweetAlert
                 const popup = Swal.getPopup();
                 if (popup) {
-                    popup.style.boxShadow = "0px 10px 30px rgba(0, 0, 0, 0.7)";
-                    popup.style.borderRadius = "15px";
+                    popup.style.width = "480px"; // Memperlebar box utama secara mutlak
+                    popup.style.boxShadow = "0px 15px 35px rgba(0, 0, 0, 0.8)"; // Efek bayangan tegas
+                    popup.style.borderRadius = "15px"; // Sudut melengkung halus
+                    popup.style.padding = "25px 15px"; // Jarak dalam kotak biar longgar
+                }
+
+                // 2. Ambil elemen tombol konfirmasi (Hubungi Admin via WA)
+                const confirmButton = Swal.getConfirmButton();
+                if (confirmButton) {
+                    confirmButton.style.backgroundColor = "#25D366"; // Warna hijau WA asli
+                    confirmButton.style.color = "white"; // Warna teks putih kontras
+                    confirmButton.style.fontSize = "16px"; // Ukuran teks proporsional
+                    confirmButton.style.fontWeight = "bold"; 
+                    confirmButton.style.padding = "12px 30px"; // 🌟 KUNCI: Membuat tombol lebar ke samping, tebal, dan tidak gepeng
+                    confirmButton.style.borderRadius = "25px"; // Menyamakan bentuk kapsul seperti form di belakangnya
+                    confirmButton.style.border = "none";
+                    confirmButton.style.boxShadow = "0 4px 12px rgba(37, 211, 102, 0.3)"; // Efek glow hijau tipis
                 }
             }
         }).then((result) => {
