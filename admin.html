@@ -31,13 +31,14 @@
                     <tr>
                         <th>Pemesan</th>
                         <th>Mobil</th>
-                        <th>Durasi</th> <th>Total</th>
+                        <th>Durasi</th> 
+                        <th>Total</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tabelAdmin">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -85,23 +86,20 @@
                     warnaBadge = 'bg-info text-dark';
                 }
 
-                // 2. DI SINI: DETEKSI OTOMATIS APAKAH SEWA HARIAN ATAU PER JAM
-                // Jika total_harga bernilai 1 Juta ke atas, maka status durasinya adalah 'Hari'
+                // DETEKSI OTOMATIS APAKAH SEWA HARIAN ATAU PER JAM
                 const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
 
                 wadah.innerHTML += `
                     <tr>
                         <td>${item.nama_pemesan}</td>
                         <td>${item.mobil}</td>
-                        <td>${item.durasi} ${satuanWaktu}</td> <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+                        <td>${item.durasi} ${satuanWaktu}</td> 
+                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
                         <td><span class="badge ${warnaBadge}">${item.status}</span></td>
                         <td>
                             <button class="btn btn-sm btn-success" onclick="updateStatus('${item.id}', 'Disetujui')">Setujui</button>
                             <button class="btn btn-sm btn-info" onclick="updateStatus('${item.id}', 'Selesai')">Selesai</button>
                             <button class="btn btn-sm btn-danger" onclick="hapusPesanan('${item.id}')">Hapus</button>
-                        <td>
-                            Total: Rp ${item.total_harga.toLocaleString('id-ID')}<br>
-                            <small class="text-warning">DP (30%): Rp ${(item.uang_dp || 0).toLocaleString('id-ID')}</small>
                         </td>
                     </tr>
                 `;
@@ -129,7 +127,7 @@
     async function hapusPesanan(id) {
         if (confirm("Yakin ingin menghapus pesanan ini?")) {
             try {
-                const { error, count } = await supabaseClient
+                const { error } = await supabaseClient
                     .from('pesanan')
                     .delete()
                     .eq('id', id);
