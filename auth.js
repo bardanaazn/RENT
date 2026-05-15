@@ -1,8 +1,8 @@
 console.log("File auth.js berhasil dimuat!");
 
 // 1. ISI DENGAN DATA DARI SUPABASE KAMU (Project Settings > API)
-const SUPABASE_URL = 'https://yrxjapqbdmkyjcepodbl.supabase.co'; // Ganti dengan URL kamu
-const SUPABASE_KEY = 'sb_publishable_H-DcuiBuFd_reOG77oQ5Jg_Pa-01F4J'; // Ganti dengan Anon Key kamu
+const SUPABASE_URL = 'https://yrxjapqbdmkyjcepodbl.supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_H-DcuiBuFd_reOG77oQ5Jg_Pa-01F4J'; 
 
 // 2. DEFINISIKAN supabaseClient DI SINI
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -27,24 +27,23 @@ async function handleLogin() {
         }
 
         if (user) {
-    localStorage.setItem('userNama', user.nama);
-    localStorage.setItem('userEmail', user.email);
-    localStorage.setItem('userRole', user.role); // TAMBAHKAN INI
+            localStorage.setItem('userNama', user.nama);
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userRole', user.role); 
 
-    alert("Selamat datang, " + user.nama);
-    
-    // Opsional: Jika dia admin, langsung arahkan ke admin.html
-    if (user.role === 'admin') {
-            window.location.href = "admin.html";
-        } else {
-            window.location.href = "index.html";
-        }
-      } // Penutup if (user)
-    } catch (err) { // Tambahkan penutup try dan blok catch
+            alert("Selamat datang, " + user.nama);
+            
+            if (user.role === 'admin') {
+                window.location.href = "admin.html";
+            } else {
+                window.location.href = "index.html";
+            }
+        } 
+    } catch (err) { 
         console.error(err);
         alert("Terjadi kesalahan saat login.");
     }
-} // Penutup fungsi handleLogin
+} 
 
 // --- BAGIAN REGISTER (PROSES DAFTAR) ---
 async function handleRegister() {
@@ -56,11 +55,11 @@ async function handleRegister() {
 
     try {
         const { error } = await supabaseClient
-            .from('user') // Pastikan kamu punya tabel 'users' di Supabase
+            .from('user') 
             .insert([{ 
                 nama: nama, 
                 email: email, 
-                password: password, // Catatan: Sebaiknya gunakan Auth bawaan Supabase untuk keamanan
+                password: password, 
                 whatsapp: whatsapp, 
                 alamat: alamat 
             }]);
@@ -68,7 +67,7 @@ async function handleRegister() {
         if (error) throw error;
 
         alert("Pendaftaran Berhasil! Silakan Login.");
-        window.location.href = "login.html"; // Arahkan ke halaman login
+        window.location.href = "login.html"; 
     } catch (err) {
         alert("Gagal Daftar: " + err.message);
     }
@@ -114,13 +113,12 @@ const formUlasan = document.getElementById('form-ulasan');
 
 if (formUlasan) {
     formUlasan.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Menghentikan refresh halaman
+        e.preventDefault(); 
         
         const btnKirim = e.target.querySelector('button');
         const nama = document.getElementById('input-nama').value;
         const pesan = document.getElementById('input-pesan').value;
 
-        // Beri tanda sedang memproses
         btnKirim.innerText = "Mengirim...";
         btnKirim.disabled = true;
 
@@ -133,7 +131,7 @@ if (formUlasan) {
 
             alert("Berhasil! Ulasan kamu sudah terbit.");
             formUlasan.reset();
-            tampilkanUlasan(); // Update daftar tanpa refresh total
+            tampilkanUlasan(); 
         } catch (err) {
             alert("Gagal kirim: " + err.message);
             console.error(err);
@@ -144,14 +142,12 @@ if (formUlasan) {
     });
 }
 
-// Fungsi ini dijalankan setiap kali halaman di-refresh
 window.onload = function() {
     const authMenu = document.getElementById('authMenu');
     const loggedInUser = localStorage.getItem('userNama'); 
-    const userRole = localStorage.getItem('userRole'); // Ambil role
+    const userRole = localStorage.getItem('userRole'); 
 
     if (loggedInUser && authMenu) {
-        // Cek jika admin, tambahkan menu Admin Panel
         let adminLink = "";
         if (userRole === 'admin') {
             adminLink = `<li><a class="dropdown-item fw-bold text-warning" href="admin.html">Admin Panel</a></li>`;
@@ -173,49 +169,42 @@ window.onload = function() {
     }
 };
 
-// Fungsi Logout untuk menghapus sesi dan mengalihkan halaman
 function logout() {
-    // 1. Hapus seluruh data sesi dari browser termasuk role
     localStorage.removeItem('userNama');
     localStorage.removeItem('userEmail');
-    localStorage.removeItem('userRole'); // <--- TAMBAHKAN INI AGAR ROLE TERHAPUS BERSIH
+    localStorage.removeItem('userRole'); 
 
-    // 2. Tampilkan pesan perpisahan
     alert("Anda telah berhasil keluar.");
-
-    // 3. ALIKAN KE HALAMAN LOGIN
     window.location.href = "login.html";
 }
 
-
-// Jalankan saat web dibuka
 tampilkanUlasan();
 
 // --- BAGIAN BUAT PESANAN (CREATE BOOKING) ---
 async function buatPesanan() {
-    // 1. Ambil data dari form booking.html
-    const pemesan = localStorage.getItem('userNama'); // Ambil dari sesi login
+    const pemesan = localStorage.getItem('userNama'); 
     const mobil = document.getElementById('pilihMobil').value;
     const durasi = document.getElementById('durasiSewa').value;
     
-    // Pastikan fungsi hitungHarga() tersedia untuk mendapatkan total
-    const total = hitungHarga(); 
-
-    // Validasi sederhana agar tidak ada data kosong
-    if (!mobil || !durasi || durasi <= 0) {
+    if (!mobil || !durasi || parseInt(durasi) <= 0) {
         alert("Harap pilih mobil dan isi durasi sewa dengan benar!");
         return;
     }
 
-    // Ambil tombol agar bisa diberi efek loading
+    const total = hitungHarga(); // Dipanggil satu kali saja
+
+    if (total <= 0) {
+        alert("Terjadi kesalahan perhitungan harga. Harap ulangi proses!");
+        return;
+    }
+
     const btnPesan = document.querySelector('.btn-pesan');
     btnPesan.innerText = "Memproses Pesanan...";
     btnPesan.disabled = true;
 
     try {
-        // 2. Kirim data ke tabel 'pesanan' di Supabase
         const { error } = await supabaseClient
-            .from('pesanan') // Nama tabel yang baru saja kita buat
+            .from('pesanan') 
             .insert([{ 
                 nama_pemesan: pemesan, 
                 mobil: mobil, 
@@ -226,9 +215,8 @@ async function buatPesanan() {
 
         if (error) throw error;
 
-        // 3. Jika berhasil
         alert("Pesanan Berhasil Dikirim! Kami akan segera menghubungi Anda.");
-        window.location.href = "index.html"; // Kembali ke beranda
+        window.location.href = "index.html"; 
     } catch (err) {
         alert("Gagal membuat pesanan: " + err.message);
         console.error(err);
@@ -244,7 +232,7 @@ async function ambilRiwayatPesanan(namaUser) {
         const { data: listPesanan, error } = await supabaseClient
             .from('pesanan')
             .select('*')
-            .eq('nama_pemesan', namaUser) // Filter: Hanya ambil pesanan milik user ini
+            .eq('nama_pemesan', namaUser) 
             .order('created_at', { ascending: false });
 
         if (error) throw error;
@@ -253,13 +241,15 @@ async function ambilRiwayatPesanan(namaUser) {
         if (listPesanan && listPesanan.length > 0) {
             tabel.innerHTML = '';
             listPesanan.forEach(item => {
-                // Tentukan warna badge berdasarkan status
                 const badgeClass = item.status === 'Menunggu Konfirmasi' ? 'badge-pending' : 'badge-success';
                 
+                // MENGUBAH TEKS MENJADI VARIABEL SATUAN WAKTU DINAMIS
+                const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
+
                 tabel.innerHTML += `
                     <tr>
                         <td>${item.mobil}</td>
-                        <td>${item.durasi} Jam</td>
+                        <td>${item.durasi} ${satuanWaktu}</td>
                         <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
                         <td><span class="badge ${badgeClass}">${item.status}</span></td>
                     </tr>

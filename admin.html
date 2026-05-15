@@ -31,14 +31,13 @@
                     <tr>
                         <th>Pemesan</th>
                         <th>Mobil</th>
-                        <th>Total</th>
+                        <th>Durasi</th> <th>Total</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tabelAdmin">
-                    <!-- Data pesanan muncul di sini -->
-                </tbody>
+                    </tbody>
             </table>
         </div>
     </div>
@@ -86,11 +85,15 @@
                     warnaBadge = 'bg-info text-dark';
                 }
 
+                // 2. DI SINI: DETEKSI OTOMATIS APAKAH SEWA HARIAN ATAU PER JAM
+                // Jika total_harga bernilai 1 Juta ke atas, maka status durasinya adalah 'Hari'
+                const satuanWaktu = item.total_harga >= 1000000 ? 'Hari' : 'Jam';
+
                 wadah.innerHTML += `
                     <tr>
                         <td>${item.nama_pemesan}</td>
                         <td>${item.mobil}</td>
-                        <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
+                        <td>${item.durasi} ${satuanWaktu}</td> <td>Rp ${item.total_harga.toLocaleString('id-ID')}</td>
                         <td><span class="badge ${warnaBadge}">${item.status}</span></td>
                         <td>
                             <button class="btn btn-sm btn-success" onclick="updateStatus('${item.id}', 'Disetujui')">Setujui</button>
@@ -121,23 +124,23 @@
     }
 
     async function hapusPesanan(id) {
-    if (confirm("Yakin ingin menghapus pesanan ini?")) {
-        try {
-            const { error, count } = await supabaseClient
-                .from('pesanan')
-                .delete()
-                .eq('id', id);
+        if (confirm("Yakin ingin menghapus pesanan ini?")) {
+            try {
+                const { error, count } = await supabaseClient
+                    .from('pesanan')
+                    .delete()
+                    .eq('id', id);
 
-            if (error) throw error;
+                if (error) throw error;
 
-            alert("Pesanan berhasil dihapus dari database!");
-            ambilSemuaPesanan(); // Refresh tabel
-        } catch (err) {
-            alert("Gagal menghapus: " + err.message);
-            console.error(err);
+                alert("Pesanan berhasil dihapus dari database!");
+                ambilSemuaPesanan(); // Refresh tabel
+            } catch (err) {
+                alert("Gagal menghapus: " + err.message);
+                console.error(err);
+            }
         }
     }
-}
 </script>
 </body>
 </html>

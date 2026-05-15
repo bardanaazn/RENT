@@ -40,14 +40,17 @@
         <p>Halo <span id="namaUser" style="font-weight: bold;">User</span>, silakan lengkapi pesanan Anda.</p>
         
         <form id="bookingForm">
-            <!-- Pilihan Mobil -->
             <select id="pilihMobil" onchange="hitungHarga()">
                 <option value="" disabled selected>Pilih Armada</option>
-                <option value="Avanza">Toyota Avanza (Rp 150rb/jam)</option>
-                <option value="Jazz">Honda Jazz RS (Rp 175rb/jam)</option>
+                <option value="Avanza">Toyota Avanza</option>
+                <option value="Jazz">Honda Jazz RS</option>
+            </select>
+
+            <select id="tipeDurasi" onchange="ubahPlaceholder(); hitungHarga();">
+                <option value="Jam">Sewa Per Jam</option>
+                <option value="Hari">Sewa Per Hari</option>
             </select>
             
-            <!-- Durasi Sewa -->
             <input type="number" id="durasiSewa" placeholder="Durasi Sewa (Jam)" min="1" oninput="hitungHarga()">
             
             <div class="harga-estimasi">Total: <span id="totalDisplay">Rp 0</span></div>
@@ -62,7 +65,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
 <script>
-    // Ambil nama user dari localStorage saat halaman dimuat
     document.addEventListener("DOMContentLoaded", function() {
         const user = localStorage.getItem('userNama');
         if (!user) {
@@ -73,16 +75,35 @@
         }
     });
 
+    // Fungsi untuk mengubah teks placeholder input sesuai tipe durasi yang dipilih
+    function ubahPlaceholder() {
+        const tipe = document.getElementById('tipeDurasi').value;
+        document.getElementById('durasiSewa').placeholder = "Durasi Sewa (" + tipe + ")";
+    }
+
+    // LOGIKA MATEMATIKA MULTI-TARIF (JAM & HARI)
     function hitungHarga() {
         const mobil = document.getElementById('pilihMobil').value;
-        const durasi = document.getElementById('durasiSewa').value;
-        let hargaPerJam = mobil === 'Avanza' ? 150000 : 175000;
+        const tipe = document.getElementById('tipeDurasi').value;
+        const durasi = parseInt(document.getElementById('durasiSewa').value) || 0;
         
-        if (mobil && durasi) {
-            const total = hargaPerJam * durasi;
+        let tarif = 0;
+
+        if (mobil === 'Avanza') {
+            // Jika tipe "Jam" pake 150rb, jika "Hari" pake 1 Juta
+            tarif = (tipe === 'Jam') ? 150000 : 1000000;
+        } else if (mobil === 'Jazz') {
+            // Jika tipe "Jam" pake 175rb, jika "Hari" pake 1.1 Juta
+            tarif = (tipe === 'Jam') ? 175000 : 1100000;
+        }
+        
+        if (mobil && durasi > 0) {
+            const total = tarif * durasi;
             document.getElementById('totalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
             return total;
         }
+        
+        document.getElementById('totalDisplay').innerText = "Rp 0";
         return 0;
     }
 </script>
