@@ -30,6 +30,21 @@
         }
         .btn-pesan:hover { background-color: #e69500; transform: scale(1.02); }
         .harga-estimasi { font-size: 18px; font-weight: bold; margin-top: 15px; color: #FFA500; }
+
+        /* --- MEMAKSA SWEETALERT2 AGAR PROPORSIAL & TIDAK GEPENG --- */
+        .swal2-popup {
+            width: 480px !important; /* Memaksa lebar kotak menjadi ideal */
+            padding: 30px 20px !important; /* Memberikan ruang napas di dalam kotak */
+        }
+
+        .swal2-styled.swal2-confirm {
+            padding: 12px 35px !important; /* Membuat tombol tebal dan lebar ke samping */
+            border-radius: 25px !important; /* Mengubah bentuk tombol menjadi kapsul bulat murni */
+            font-size: 16px !important;
+            font-weight: bold !important;
+            background-color: #25D366 !important; /* Memastikan warna hijau WA asli terkunci */
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3) !important; /* Efek glow halus */
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
