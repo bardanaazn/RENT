@@ -254,23 +254,91 @@
             color: #FFA500;
             font-weight: bold;
         }
+
+        @media (max-width: 576px) {
+        /* Mengatur teks utama di banner agar pas di layar HP */
+        .hero-section h1 {
+            font-size: 24px !important;
+            line-height: 1.3 !important;
+        }
+        
+        /* Mengatur tombol booking agar tidak terlalu besar */
+        .hero-section .btn {
+            font-size: 14px !important;
+            padding: 8px 16px !important;
+        }
+
+        /* Mengunci body website agar tidak meluber ke kanan di HP */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+        }
+        /* Membuat menu vertikal rapi di HP saat tombol diklik */
+        .navbar-collapse {
+            background: rgba(33, 37, 41, 0.95) !important;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 10px 0 !important;
+        }
+
+        .btn-login-nav {
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        /* 1. Merapikan Section Pembungkus Testimoni */
+        #testimoni, .testimoni-section {
+            padding: 40px 20px !important; /* Memberi jarak aman atas, bawah, kiri, dan kanan layar */
+        }
+
+        /* 2. Mengecilkan Judul Utama agar Proporsional di HP */
+        #testimoni h2, .testimoni-section h2, .judul-besar-testimoni {
+            font-size: 26px !important;
+            line-height: 1.3 !important;
+            margin-bottom: 15px !important;
+        }
+
+        /* 3. Merapikan Sub-teks (Bagikan pengalaman seru...) */
+        #testimoni p, .testimoni-section p {
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+            margin-bottom: 25px !important;
+        }
+
+        /* 4. Memberi Jarak Manis pada Form/Card Putih */
+        .card, .form-ulasan-container {
+            padding: 20px !important; /* Biar isian form di dalamnya tidak terlalu mepet ke kotak putih */
+            border-radius: 12px !important;
+        }
+        }
     </style>
 </head>
 <body>
 
     <div class="hero-section" id="home">
-        <nav class="navbar navbar-expand-lg pt-4 fixed-top" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">
+        <nav class="navbar navbar-expand-lg pt-4 fixed-top" style="background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px);">
             <div class="container">
-                <a class="navbar-brand" href="#home">🚕 RentalinAJA</a>
-                <div class="d-none d-lg-block">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#tentang-kami">Tentang kami</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#daftar-mobil">Mobil</a></li>
-                        <li id="authMenu" class="nav-item d-flex align-items-center ms-lg-3">
-    <a href="login.html" class="btn-login-nav">Login</a>
-</li>
+                <a class="navbar-brand text-white" href="#home">🚖 RentalinAJA</a>
+        
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                    style="border-color: rgba(255,255,255,0.5);">
+                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto text-center gap-2 pt-3 pt-lg-0">
+                        <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#tentang-kami">Tentang Kami</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#testimoni">Testimoni</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#daftar-mobil">Mobil</a></li>
+                        <li class="nav-item id-auth" id="authMenu">
+                            <a href="login.html" class="btn-login-nav d-inline-block">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
